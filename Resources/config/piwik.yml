@@ -1,0 +1,28 @@
+parameters:
+    piwik.client.class:                 CiscoSystems\PiwikBundle\Worker\Client
+    piwik.client.token:                 null
+    piwik.connection.http.class:       CiscoSystems\PiwikBundle\Connection\HttpConnection
+    piwik.connection.http.url:          null
+    piwik.connection.piwik.class:       CiscoSystems\PiwikBundle\Connection\PiwikConnection
+    piwik.connection.piwik.init:        false
+    piwik.connectionstub.class:         CiscoSystems\PiwikBundle\Connection\StubConnection
+
+services:
+    piwik.client:
+        class: '%piwik.client.class%'
+        arguments:
+            - '@piwik.connection.http'
+            - '%piwik.client.token%'
+
+    piwik.connection.http:
+        class: '%piwik.connection.http.class%'
+        arguments:
+            - %piwik.connection.http.url%
+
+    piwik.connection.piwik:
+        class: '%piwik.connection.piwik.class%'
+        arguments:
+            - '%piwik.connection.piwik.init%'
+
+    piwik.connection.stub:
+        class: '%piwik.connectionstub.class%'
