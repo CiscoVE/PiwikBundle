@@ -32,7 +32,7 @@ class PiwikConnection implements ConnectionInterface
     public function send( array $params = array() )
     {
         $request = new \Piwik_API_Request( $this->convertParamsToQuery( $params ) );
-
+        
         return $request->process();
     }
 
