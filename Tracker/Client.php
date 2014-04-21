@@ -1,6 +1,6 @@
 <?php
 
-namespace CiscoSystems\PiwikBundle\Service;
+namespace CiscoSystems\PiwikBundle\Tracker;
 
 use CiscoSystems\PiwikBundle\Connection\ConnectionInterface;
 use CiscoSystems\PiwikBundle\Exception\Exception;
@@ -49,6 +49,8 @@ class Client
         $params['method'] = $method;
         $params['token_auth'] = $this->token;
         $params['format'] = $format;
+
+        ladybug_dump( $params );
 
         $data = $this->getConnection()->send( $params );
 
