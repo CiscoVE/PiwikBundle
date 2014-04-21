@@ -7,11 +7,9 @@ use Buzz\Browser;
 use Buzz\Client\Curl;
 
 /**
- * Description of HttpConnection
- *
- * @author tam
+ * Piwik HTTP Connector.
  */
-class HttpConnection
+class HttpConnection extends PiwikConnection
 {
     protected $browser;
     protected $apiUrl;
@@ -25,7 +23,7 @@ class HttpConnection
     public function __construct( $apiUrl, Browser $browser = null )
     {
         $this->browser = ( null === $browser ) ?
-                new Browser(new Curl()) :
+                new Browser( new Curl() ) :
                 $browser;
 
         $this->apiUrl = $apiUrl;
@@ -39,6 +37,8 @@ class HttpConnection
         $params['module'] = 'API';
 
         $url = $this->apiUrl . '?' . $this->convertParamsToQuery( $params );
+
+//        ladybug_dump_die( $url );
 
         $response =  $this->browser->get( $url );
         if ( !$response->isSuccessful() )

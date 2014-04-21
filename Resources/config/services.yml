@@ -1,5 +1,5 @@
 parameters:
-    piwik.client.class:                 CiscoSystems\PiwikBundle\Worker\Client
+    piwik.client.class:                 CiscoSystems\PiwikBundle\Service\Client
     piwik.client.token:                 null
     piwik.connection.http.class:       CiscoSystems\PiwikBundle\Connection\HttpConnection
     piwik.connection.http.url:          null

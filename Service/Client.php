@@ -1,6 +1,6 @@
 <?php
 
-namespace CiscoSystems\PiwikBundle\Worker;
+namespace CiscoSystems\PiwikBundle\Service;
 
 use CiscoSystems\PiwikBundle\Connection\ConnectionInterface;
 use CiscoSystems\PiwikBundle\Exception\Exception;
@@ -10,8 +10,8 @@ use CiscoSystems\PiwikBundle\Exception\Exception;
  */
 class Client
 {
-    private $connection;
-    private $token;
+    protected $connection;
+    protected $token;
 
     /**
      * Initialize Piwik client.
@@ -22,7 +22,7 @@ class Client
     public function __construct( ConnectionInterface $connection, $token = 'anonymous' )
     {
         $this->connection = $connection;
-        $this->setToken( $token );
+        $this->token = $token;
     }
 
     /**
@@ -44,13 +44,15 @@ class Client
      *
      * @return mixed
      */
-    public function call( $method, array $params = array(), $format = 'php' )
+    public function call( $method, $params = array(), $format = 'original' )
     {
         $params['method'] = $method;
         $params['token_auth'] = $this->token;
         $params['format'] = $format;
 
         $data = $this->getConnection()->send( $params );
+
+        ladybug_dump_die( $data );
 
         if( 'php' === $format )
         {
@@ -62,10 +64,8 @@ class Client
 
             return $object;
         }
-        else
-        {
-            return $data;
-        }
+
+        return $data;
     }
 
     /**

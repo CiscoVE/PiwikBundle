@@ -3,7 +3,7 @@
 namespace CiscoSystems\PiwikBundle\Connection;
 
 /**
- * Description of ConnectionInterface
+ * Piwik Client Abstract Connection.
  */
 interface ConnectionInterface
 {

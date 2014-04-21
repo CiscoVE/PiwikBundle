@@ -2,15 +2,16 @@
 
 namespace CiscoSystems\PiwikBundle\DependencyInjection;
 
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Description of CiscoSystemsPiwikBundleExtension
+ * This is the class that loads and manages your bundle configuration
  *
- * @author tam
+ * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
 class CiscoSystemsPiwikExtension extends Extension
 {
@@ -75,18 +76,8 @@ class CiscoSystemsPiwikExtension extends Extension
         return $merged;
     }
 
-    /**
-     * Returns the base path for the XSD files.
-     *
-     * @return string The XSD base path
-     */
-    public function getXsdValidationBasePath()
-    {
-        return __DIR__ . '/../Resources/config/schema';
-    }
-
     public function getAlias()
     {
-        return 'cisco_piwik';
+        return 'cisco_systems_piwik';
     }
 }
