@@ -2316,487 +2316,488 @@ class Piwik
      * MODULE: TRANSITIONS
      * Get transitions for page URLs, titles and actions
      */
-    /*     * *
-     * Get transitions for a page title
-     *
-     * @param $pageTitle
-     * @param string $segment
-     * @param string $limitBeforeGrouping
-     * @return mixed
-     */
-    public function getTransitionsForPageTitle( $pageTitle, $segment = '', $limitBeforeGrouping = '' )
-    {
-        return $this->_request( 'Transitions.getTransitionsForPageTitle', array(
-                    'pageTitle' => $pageTitle,
-                    'segment' => $segment,
-                    'limitBeforeGrouping' => $limitBeforeGrouping,
-                ) );
-    }
-    /*     * *
-     * Get transitions for a page URL
-     *
-     * @param $pageUrl
-     * @param string $segment
-     * @param string $limitBeforeGrouping
-     * @return mixed
-     */
-
-    public function getTransitionsForPageUrl( $pageUrl, $segment = '', $limitBeforeGrouping = '' )
-    {
-        return $this->_request( 'Transitions.getTransitionsForPageTitle', array(
-                    'pageUrl' => $pageUrl,
-                    'segment' => $segment,
-                    'limitBeforeGrouping' => $limitBeforeGrouping,
-                ) );
-    }
-    /*     * *
-     * Get transitions for a page URL
-     *
-     * @param $actionName
-     * @param $actionType
-     * @param string $segment
-     * @param string $limitBeforeGrouping
-     * @param string $parts
-     * @param bool $returnNormalizedUrls
-     * @return mixed
-     */
-
-    public function getTransitionsForAction( $actionName, $actionType, $segment = '', $limitBeforeGrouping = '', $parts = 'all', $returnNormalizedUrls = '' )
-    {
-        return $this->_request( 'Transitions.getTransitionsForAction', array(
-                    'actionName' => $actionName,
-                    'actionType' => $actionType,
-                    'segment' => $segment,
-                    'limitBeforeGrouping' => $limitBeforeGrouping,
-                    'parts' => $parts,
-                    'returnNormalizedUrls' => $returnNormalizedUrls,
-                ) );
-    }
-
-    /**
-     * Get translations for the transitions
-     *
-     * @return mixed
-     */
-    public function getTransitionsTranslations()
-    {
-        return $this->_request( 'Transitions.getTranslations' );
-    }
+//
+//    /*     * *
+//     * Get transitions for a page title
+//     *
+//     * @param $pageTitle
+//     * @param string $segment
+//     * @param string $limitBeforeGrouping
+//     * @return mixed
+//     */
+//    public function getTransitionsForPageTitle( $pageTitle, $segment = '', $limitBeforeGrouping = '' )
+//    {
+//        return $this->_request( 'Transitions.getTransitionsForPageTitle', array(
+//                    'pageTitle' => $pageTitle,
+//                    'segment' => $segment,
+//                    'limitBeforeGrouping' => $limitBeforeGrouping,
+//                ) );
+//    }
+//    /*     * *
+//     * Get transitions for a page URL
+//     *
+//     * @param $pageUrl
+//     * @param string $segment
+//     * @param string $limitBeforeGrouping
+//     * @return mixed
+//     */
+//
+//    public function getTransitionsForPageUrl( $pageUrl, $segment = '', $limitBeforeGrouping = '' )
+//    {
+//        return $this->_request( 'Transitions.getTransitionsForPageTitle', array(
+//                    'pageUrl' => $pageUrl,
+//                    'segment' => $segment,
+//                    'limitBeforeGrouping' => $limitBeforeGrouping,
+//                ) );
+//    }
+//    /*     * *
+//     * Get transitions for a page URL
+//     *
+//     * @param $actionName
+//     * @param $actionType
+//     * @param string $segment
+//     * @param string $limitBeforeGrouping
+//     * @param string $parts
+//     * @param bool $returnNormalizedUrls
+//     * @return mixed
+//     */
+//
+//    public function getTransitionsForAction( $actionName, $actionType, $segment = '', $limitBeforeGrouping = '', $parts = 'all', $returnNormalizedUrls = '' )
+//    {
+//        return $this->_request( 'Transitions.getTransitionsForAction', array(
+//                    'actionName' => $actionName,
+//                    'actionType' => $actionType,
+//                    'segment' => $segment,
+//                    'limitBeforeGrouping' => $limitBeforeGrouping,
+//                    'parts' => $parts,
+//                    'returnNormalizedUrls' => $returnNormalizedUrls,
+//                ) );
+//    }
+//
+//    /**
+//     * Get translations for the transitions
+//     *
+//     * @return mixed
+//     */
+//    public function getTransitionsTranslations()
+//    {
+//        return $this->_request( 'Transitions.getTranslations' );
+//    }
 
     /**
      * MODULE: USER COUNTRY
      * Get visitors country information
      */
-
-    /**
-     * Get countries of all visitors
-     *
-     * @param string $segment
-     */
-    public function getCountry( $segment = '' )
-    {
-        return $this->_request( 'UserCountry.getCountry', array(
-                    'segment' => $segment,
-                ) );
-    }
-
-    /**
-     * Get continents of all visitors
-     *
-     * @param string $segment
-     */
-    public function getContinent( $segment = '' )
-    {
-        return $this->_request( 'UserCountry.getContinent', array(
-                    'segment' => $segment,
-                ) );
-    }
-
-    /**
-     * Get regions of all visitors
-     *
-     * @param string $segment
-     */
-    public function getRegion( $segment = '' )
-    {
-        return $this->_request( 'UserCountry.getRegion', array(
-                    'segment' => $segment,
-                ) );
-    }
-
-    /**
-     * Get cities of all visitors
-     *
-     * @param string $segment
-     */
-    public function getCity( $segment = '' )
-    {
-        return $this->_request( 'UserCountry.getCity', array(
-                    'segment' => $segment,
-                ) );
-    }
-
-    /**
-     * Get the number of disting countries
-     *
-     * @param string $segment
-     */
-    public function getCountryNumber( $segment = '' )
-    {
-        return $this->_request( 'UserCountry.getNumberOfDistinctCountries', array(
-                    'segment' => $segment,
-                ) );
-    }
+//
+//    /**
+//     * Get countries of all visitors
+//     *
+//     * @param string $segment
+//     */
+//    public function getCountry( $segment = '' )
+//    {
+//        return $this->_request( 'UserCountry.getCountry', array(
+//                    'segment' => $segment,
+//                ) );
+//    }
+//
+//    /**
+//     * Get continents of all visitors
+//     *
+//     * @param string $segment
+//     */
+//    public function getContinent( $segment = '' )
+//    {
+//        return $this->_request( 'UserCountry.getContinent', array(
+//                    'segment' => $segment,
+//                ) );
+//    }
+//
+//    /**
+//     * Get regions of all visitors
+//     *
+//     * @param string $segment
+//     */
+//    public function getRegion( $segment = '' )
+//    {
+//        return $this->_request( 'UserCountry.getRegion', array(
+//                    'segment' => $segment,
+//                ) );
+//    }
+//
+//    /**
+//     * Get cities of all visitors
+//     *
+//     * @param string $segment
+//     */
+//    public function getCity( $segment = '' )
+//    {
+//        return $this->_request( 'UserCountry.getCity', array(
+//                    'segment' => $segment,
+//                ) );
+//    }
+//
+//    /**
+//     * Get the number of disting countries
+//     *
+//     * @param string $segment
+//     */
+//    public function getCountryNumber( $segment = '' )
+//    {
+//        return $this->_request( 'UserCountry.getNumberOfDistinctCountries', array(
+//                    'segment' => $segment,
+//                ) );
+//    }
     /**
      * MODULE: USER SETTINGS
      * Get the user settings
      */
-
-    /**
-     * Get resolution
-     *
-     * @param string $segment
-     */
-    public function getResolution( $segment = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UserSettings.getResolution' ), array(
-                    'segment' => $segment,
-                ) );
-    }
-
-    /**
-     * Get configuration
-     *
-     * @param string $segment
-     */
-    public function getConfiguration( $segment = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UserSettings.getConfiguration' ), array(
-                    'segment' => $segment,
-                ) );
-    }
-
-    /**
-     * Get operating system
-     *
-     * @param string $segment
-     * @param bool $addShortLabel
-     */
-    public function getOs( $segment = '', $addShortLabel = '1' )
-    {
-        return $this->_request( $this->_parseUrl( 'UserSettings.getOS' ), array(
-                    'segment' => $segment,
-                    'addShortLabel' => $addShortLabel,
-                ) );
-    }
-
-    /**
-     * Get operating system family
-     *
-     * @param string $segment
-     */
-    public function getOSFamily( $segment = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UserSettings.getOSFamily' ), array(
-                    'segment' => $segment,
-                ) );
-    }
-
-    /**
-     * Get Mobile vs Desktop
-     *
-     * @param string $segment
-     */
-    public function getMobileVsDesktop( $segment = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UserSettings.getMobileVsDesktop ' ), array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get browser version
-     *
-     * @param string $segment
-     */
-    public function getBrowserVersion( $segment = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UserSettings.getBrowserVersion' ), array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get browser
-     *
-     * @param string $segment
-     */
-    public function getBrowser( $segment = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UserSettings.getBrowser' ), array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get browser type
-     *
-     * @param string $segment
-     */
-    public function getBrowserType( $segment = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UserSettings.getBrowserType' ), array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get wide screen information
-     *
-     * @param string $segment
-     */
-    public function getWideScreen( $segment = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UserSettings.getWideScreen' ), array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get plugins
-     *
-     * @param string $segment
-     */
-    public function getUserPlugin( $segment = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UserSettings.getPlugin' ), array(
-                    'segment' => $segment,
-        ) );
-    }
+//
+//    /**
+//     * Get resolution
+//     *
+//     * @param string $segment
+//     */
+//    public function getResolution( $segment = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UserSettings.getResolution' ), array(
+//                    'segment' => $segment,
+//                ) );
+//    }
+//
+//    /**
+//     * Get configuration
+//     *
+//     * @param string $segment
+//     */
+//    public function getConfiguration( $segment = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UserSettings.getConfiguration' ), array(
+//                    'segment' => $segment,
+//                ) );
+//    }
+//
+//    /**
+//     * Get operating system
+//     *
+//     * @param string $segment
+//     * @param bool $addShortLabel
+//     */
+//    public function getOs( $segment = '', $addShortLabel = '1' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UserSettings.getOS' ), array(
+//                    'segment' => $segment,
+//                    'addShortLabel' => $addShortLabel,
+//                ) );
+//    }
+//
+//    /**
+//     * Get operating system family
+//     *
+//     * @param string $segment
+//     */
+//    public function getOSFamily( $segment = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UserSettings.getOSFamily' ), array(
+//                    'segment' => $segment,
+//                ) );
+//    }
+//
+//    /**
+//     * Get Mobile vs Desktop
+//     *
+//     * @param string $segment
+//     */
+//    public function getMobileVsDesktop( $segment = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UserSettings.getMobileVsDesktop ' ), array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get browser version
+//     *
+//     * @param string $segment
+//     */
+//    public function getBrowserVersion( $segment = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UserSettings.getBrowserVersion' ), array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get browser
+//     *
+//     * @param string $segment
+//     */
+//    public function getBrowser( $segment = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UserSettings.getBrowser' ), array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get browser type
+//     *
+//     * @param string $segment
+//     */
+//    public function getBrowserType( $segment = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UserSettings.getBrowserType' ), array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get wide screen information
+//     *
+//     * @param string $segment
+//     */
+//    public function getWideScreen( $segment = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UserSettings.getWideScreen' ), array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get plugins
+//     *
+//     * @param string $segment
+//     */
+//    public function getUserPlugin( $segment = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UserSettings.getPlugin' ), array(
+//                    'segment' => $segment,
+//        ) );
+//    }
     /**
      * MODULE: USER MANAGER
      * Manage piwik users
      */
-
-    /**
-     * Set user preference
-     *
-     * @param string $userLogin Username
-     * @param string $preferenceName
-     * @param string $preferenceValue
-     */
-    public function setUserPreference( $userLogin, $preferenceName, $preferenceValue )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.setUserPreference' ), array(
-                    'userLogin' => $userLogin,
-                    'preferenceName' => $preferenceName,
-                    'preferenceValue' => $preferenceValue,
-        ) );
-    }
-
-    /**
-     * Get user preference
-     *
-     * @param string $userLogin Username
-     * @param string $preferenceName
-     */
-    public function getUserPreference( $userLogin, $preferenceName )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.getUserPreference' ), array(
-                    'userLogin' => $userLogin,
-                    'preferenceName' => $preferenceName,
-        ) );
-    }
-
-    /**
-     * Get user by username
-     *
-     * @param array $userLogins Array with Usernames
-     */
-    public function getUsers( $userLogins = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.getUsers' ), array(
-                    'userLogins' => $userLogins,
-        ) );
-    }
-
-    /**
-     * Get all user logins
-     */
-    public function getUsersLogin()
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.getUsersLogin' ) );
-    }
-
-    /**
-     * Get sites by user access
-     *
-     * @param string $access
-     */
-    public function getUsersSitesFromAccess( $access )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.getUsersSitesFromAccess' ), array(
-                    'access' => $access,
-        ) );
-    }
-
-    /**
-     * Get all users with access level from the current site
-     */
-    public function getUsersAccess()
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.getUsersAccessFromSite' ) );
-    }
-
-    /**
-     * Get all users with access $access to the current site
-     *
-     * @param string $access
-     */
-    public function getUsersWithSiteAccess( $access )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.getUsersWithSiteAccess' ), array(
-                    'access' => $access,
-        ) );
-    }
-
-    /**
-     * Get site access from the user $userLogin
-     *
-     * @param string $userLogin Username
-     */
-    public function getSitesAccessFromUser( $userLogin )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.getSitesAccessFromUser' ), array(
-                    'userLogin' => $userLogin,
-        ) );
-    }
-
-    /**
-     * Get user by login
-     *
-     * @param string $userLogin Username
-     */
-    public function getUser( $userLogin )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.getUser' ), array(
-                    'userLogin' => $userLogin,
-        ) );
-    }
-
-    /**
-     * Get user by email
-     *
-     * @param string $userEmail
-     */
-    public function getUserByEmail( $userEmail )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.getUserByEmail' ), array(
-                    'userEmail' => $userEmail,
-        ) );
-    }
-
-    /**
-     * Add a user
-     *
-     * @param string $userLogin Username
-     * @param string $password Password in clear text
-     * @param string $email
-     * @param string $alias
-     */
-    public function addUser( $userLogin, $password, $email, $alias = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.addUser' ), array(
-                    'userLogin' => $userLogin,
-                    'password' => $password,
-                    'email' => $email,
-                    'alias' => $alias,
-        ) );
-    }
-
-    /**
-     * Update a user
-     *
-     * @param string $userLogin Username
-     * @param string $password Password in clear text
-     * @param string $email
-     * @param string $alias
-     */
-    public function updateUser( $userLogin, $password = '', $email = '', $alias = '' )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.updateUser' ), array(
-                    'userLogin' => $userLogin,
-                    'password' => $password,
-                    'email' => $email,
-                    'alias' => $alias,
-        ) );
-    }
-
-    /**
-     * Delete a user
-     *
-     * @param string $userLogin Username
-     */
-    public function deleteUser( $userLogin )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.deleteUser' ), array(
-                    'userLogin' => $userLogin,
-        ) );
-    }
-
-    /**
-     * Checks if a user exist
-     *
-     * @param string $userLogin
-     */
-    public function userExists( $userLogin )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.userExists' ), array(
-                    'userLogin' => $userLogin,
-        ) );
-    }
-
-    /**
-     * Checks if a user exist by email
-     *
-     * @param string $userEmail
-     */
-    public function userEmailExists( $userEmail )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.userEmailExists' ), array(
-                    'userEmail' => $userEmail,
-        ) );
-    }
-
-    /**
-     * Grant access to multiple sites
-     *
-     * @param string $userLogin Username
-     * @param string $access
-     * @param array $idSites
-     */
-    public function setUserAccess( $userLogin, $access, $idSites )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.setUserAccess' ), array(
-                    'userLogin' => $userLogin,
-                    'access' => $access,
-                    'idSites' => $idSites,
-        ) );
-    }
-
-    /**
-     * Get the token for a user
-     *
-     * @param string $userLogin Username
-     * @param string $md5Password Password in clear text
-     */
-    public function getTokenAuth( $userLogin, $md5Password )
-    {
-        return $this->_request( $this->_parseUrl( 'UsersManager.getTokenAuth' ), array(
-                    'userLogin' => $userLogin,
-                    'md5Password' => md5( $md5Password ),
-        ) );
-    }
+//
+//    /**
+//     * Set user preference
+//     *
+//     * @param string $userLogin Username
+//     * @param string $preferenceName
+//     * @param string $preferenceValue
+//     */
+//    public function setUserPreference( $userLogin, $preferenceName, $preferenceValue )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.setUserPreference' ), array(
+//                    'userLogin' => $userLogin,
+//                    'preferenceName' => $preferenceName,
+//                    'preferenceValue' => $preferenceValue,
+//        ) );
+//    }
+//
+//    /**
+//     * Get user preference
+//     *
+//     * @param string $userLogin Username
+//     * @param string $preferenceName
+//     */
+//    public function getUserPreference( $userLogin, $preferenceName )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.getUserPreference' ), array(
+//                    'userLogin' => $userLogin,
+//                    'preferenceName' => $preferenceName,
+//        ) );
+//    }
+//
+//    /**
+//     * Get user by username
+//     *
+//     * @param array $userLogins Array with Usernames
+//     */
+//    public function getUsers( $userLogins = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.getUsers' ), array(
+//                    'userLogins' => $userLogins,
+//        ) );
+//    }
+//
+//    /**
+//     * Get all user logins
+//     */
+//    public function getUsersLogin()
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.getUsersLogin' ) );
+//    }
+//
+//    /**
+//     * Get sites by user access
+//     *
+//     * @param string $access
+//     */
+//    public function getUsersSitesFromAccess( $access )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.getUsersSitesFromAccess' ), array(
+//                    'access' => $access,
+//        ) );
+//    }
+//
+//    /**
+//     * Get all users with access level from the current site
+//     */
+//    public function getUsersAccess()
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.getUsersAccessFromSite' ) );
+//    }
+//
+//    /**
+//     * Get all users with access $access to the current site
+//     *
+//     * @param string $access
+//     */
+//    public function getUsersWithSiteAccess( $access )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.getUsersWithSiteAccess' ), array(
+//                    'access' => $access,
+//        ) );
+//    }
+//
+//    /**
+//     * Get site access from the user $userLogin
+//     *
+//     * @param string $userLogin Username
+//     */
+//    public function getSitesAccessFromUser( $userLogin )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.getSitesAccessFromUser' ), array(
+//                    'userLogin' => $userLogin,
+//        ) );
+//    }
+//
+//    /**
+//     * Get user by login
+//     *
+//     * @param string $userLogin Username
+//     */
+//    public function getUser( $userLogin )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.getUser' ), array(
+//                    'userLogin' => $userLogin,
+//        ) );
+//    }
+//
+//    /**
+//     * Get user by email
+//     *
+//     * @param string $userEmail
+//     */
+//    public function getUserByEmail( $userEmail )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.getUserByEmail' ), array(
+//                    'userEmail' => $userEmail,
+//        ) );
+//    }
+//
+//    /**
+//     * Add a user
+//     *
+//     * @param string $userLogin Username
+//     * @param string $password Password in clear text
+//     * @param string $email
+//     * @param string $alias
+//     */
+//    public function addUser( $userLogin, $password, $email, $alias = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.addUser' ), array(
+//                    'userLogin' => $userLogin,
+//                    'password' => $password,
+//                    'email' => $email,
+//                    'alias' => $alias,
+//        ) );
+//    }
+//
+//    /**
+//     * Update a user
+//     *
+//     * @param string $userLogin Username
+//     * @param string $password Password in clear text
+//     * @param string $email
+//     * @param string $alias
+//     */
+//    public function updateUser( $userLogin, $password = '', $email = '', $alias = '' )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.updateUser' ), array(
+//                    'userLogin' => $userLogin,
+//                    'password' => $password,
+//                    'email' => $email,
+//                    'alias' => $alias,
+//        ) );
+//    }
+//
+//    /**
+//     * Delete a user
+//     *
+//     * @param string $userLogin Username
+//     */
+//    public function deleteUser( $userLogin )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.deleteUser' ), array(
+//                    'userLogin' => $userLogin,
+//        ) );
+//    }
+//
+//    /**
+//     * Checks if a user exist
+//     *
+//     * @param string $userLogin
+//     */
+//    public function userExists( $userLogin )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.userExists' ), array(
+//                    'userLogin' => $userLogin,
+//        ) );
+//    }
+//
+//    /**
+//     * Checks if a user exist by email
+//     *
+//     * @param string $userEmail
+//     */
+//    public function userEmailExists( $userEmail )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.userEmailExists' ), array(
+//                    'userEmail' => $userEmail,
+//        ) );
+//    }
+//
+//    /**
+//     * Grant access to multiple sites
+//     *
+//     * @param string $userLogin Username
+//     * @param string $access
+//     * @param array $idSites
+//     */
+//    public function setUserAccess( $userLogin, $access, $idSites )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.setUserAccess' ), array(
+//                    'userLogin' => $userLogin,
+//                    'access' => $access,
+//                    'idSites' => $idSites,
+//        ) );
+//    }
+//
+//    /**
+//     * Get the token for a user
+//     *
+//     * @param string $userLogin Username
+//     * @param string $md5Password Password in clear text
+//     */
+//    public function getTokenAuth( $userLogin, $md5Password )
+//    {
+//        return $this->_request( $this->_parseUrl( 'UsersManager.getTokenAuth' ), array(
+//                    'userLogin' => $userLogin,
+//                    'md5Password' => md5( $md5Password ),
+//        ) );
+//    }
     /**
      * MODULE: VISIT FREQUENCY
      * Get visit frequency

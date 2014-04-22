@@ -6,14 +6,14 @@ use CiscoSystems\PiwikBundle\Connection\Request;
 use CiscoSystems\PiwikBundle\Module\Module as Base;
 
 /**
- * MODULE: VISITOR INTEREST
- * Get the interests of the visitor
+ * MODULE: USER COUNTRY
+ * Get visitors country information
  */
-class VisitorInterest extends Base
+class UserCountry extends Base
 {
     public function __construct( Request $request )
     {
-        parent::__construct( $request, 'VisitorInterest' );
+        parent::__construct( $request, 'UserCountry' );
     }
 
     public function setQuery( $query )
@@ -22,13 +22,13 @@ class VisitorInterest extends Base
     }
 
     /**
-     * Get the number of visits per visit duration
+     * Get countries of all visitors
      *
      * @param string $segment
      */
-    public function getNumberOfVisitsPerDuration( $segment = '' )
+    public function getCountry( $segment = '' )
     {
-        $this->setQuery( 'getNumberOfVisitsPerVisitDuration' );
+        $this->setQuery( 'getCountry' );
         $this->setParameters( array(
             'segment' => $segment,
         ));
@@ -37,13 +37,13 @@ class VisitorInterest extends Base
     }
 
     /**
-     * Get the number of visits per visited page
+     * Get continents of all visitors
      *
      * @param string $segment
      */
-    public function getNumberOfVisitsPerPage( $segment = '' )
+    public function getContinent( $segment = '' )
     {
-        $this->setQuery( 'getNumberOfVisitsPerPage' );
+        $this->setQuery( 'getContinent' );
         $this->setParameters( array(
             'segment' => $segment,
         ));
@@ -52,13 +52,13 @@ class VisitorInterest extends Base
     }
 
     /**
-     * Get the number of days elapsed since the last visit
+     * Get regions of all visitors
      *
      * @param string $segment
      */
-    public function getNumberOfVisitsByDaySinceLast( $segment = '' )
+    public function getRegion( $segment = '' )
     {
-        $this->setQuery( 'getNumberOfVisitsByDaysSinceLast' );
+        $this->setQuery( 'getRegion' );
         $this->setParameters( array(
             'segment' => $segment,
         ));
@@ -67,13 +67,28 @@ class VisitorInterest extends Base
     }
 
     /**
-     * Get the number of visits by visit count
+     * Get cities of all visitors
      *
      * @param string $segment
      */
-    public function getNumberOfVisitsByCount( $segment = '' )
+    public function getCity( $segment = '' )
     {
-        $this->setQuery( 'getNumberOfVisitsByVisitCount' );
+        $this->setQuery( 'getCity' );
+        $this->setParameters( array(
+            'segment' => $segment,
+        ));
+
+        return $this->execute();
+    }
+
+    /**
+     * Get the number of disting countries
+     *
+     * @param string $segment
+     */
+    public function getCountryNumber( $segment = '' )
+    {
+        $this->setQuery( 'getNumberOfDistinctCountries' );
         $this->setParameters( array(
             'segment' => $segment,
         ));

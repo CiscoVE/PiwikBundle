@@ -11,25 +11,60 @@ use CiscoSystems\PiwikBundle\Module\Module as Base;
  */
 class VisitTime extends Base
 {
-    const MODULE_NAME           = 'VisitTime';
-    const VISITLOCALTIME        = 'getVisitInformationPerLocalTime';
-    const VISITSERVERTIME       = 'getVisitInformationPerServerTime';
-    const VISITBYDAYOFWEEK      = 'getByDayOfWeek';
-
     public function __construct( Request $request )
     {
-        parent::__construct( $request, self::MODULE_NAME );
+        parent::__construct( $request, 'VisitTime' );
     }
 
-    public function getData( $query, $params )
+    public function setQuery( $string )
     {
-        if( null !== $query )
-        {
-            return $this->request( $this->name . $query, $params );
-        }
-        else
-        {
-            return false;
-        }
+        $this->query = $this->name . $string;
+    }
+
+    /**
+     * Get the visit by local time
+     *
+     * @param string $segment
+     */
+    public function getVisitLocalTime( $segment = '' )
+    {
+        $this->setQuery('getVisitInformationPerLocalTime' );
+        $this->setParameters( array(
+            'segment' => $segment,
+        ));
+
+        return $this->execute();
+    }
+
+    /**
+     * Get the visit by server time
+     *
+     * @param string $segment
+     * @param boolean $hideFutureHoursWhenToday Hide the future hours when the report is created for today
+     */
+    public function getVisitServerTime( $segment = '', $hideFutureHoursWhenToday = '' )
+    {
+        $this->setQuery( 'getVisitInformationPerServerTime' );
+        $this->setParameters( array(
+            'segment' => $segment,
+            'hideFutureHoursWhenToday' => $hideFutureHoursWhenToday
+        ));
+
+        return $this->execute();
+    }
+
+    /**
+     * Get the visit by server time
+     *
+     * @param string $segment
+     */
+    public function getByDayOfWeek( $segment = '' )
+    {
+        $this->setQuery( 'getByDayOfWeek' );
+        $this->setParameters( array(
+            'segment' => $segment,
+        ));
+
+        return $this->execute();
     }
 }

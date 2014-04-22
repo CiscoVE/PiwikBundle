@@ -8,13 +8,14 @@ abstract class Module
 {
     protected $request;
     protected $name;
-    protected $params;
+    protected $parameters;
+    protected $query;
 
     public function __construct( Request $request, $name )
     {
         $this->request = $request;
         $this->name = $name;
-        $this->params = array( 'segment' => '' );
+        $this->parameters = array();
     }
 
     public function getName()
@@ -39,35 +40,48 @@ abstract class Module
 
     public function getParameters()
     {
-        return $this->params;
+        return $this->parameters;
     }
 
-    public function setParameters( $params )
+    public function setParameters( $parameters = array() )
     {
-        $this->params = $params;
+        $this->parameters = $parameters;
     }
 
     public function addParameter( $name, $value )
     {
-        if( in_array( $name, $this->params ) )
+        if( in_array( $name, $this->parameters ) )
         {
             return false;
         }
 
-        $this->params[$name] = $value;
+        $this->parameters[$name] = $value;
     }
 
     public function setParameter( $name, $value )
     {
-        if( !in_array( $name, $this->params ) )
+        if( !in_array( $name, $this->parameters ) )
         {
             return false;
         }
 
-        $this->params[$name] = $value;
+        $this->parameters[$name] = $value;
     }
 
-    abstract protected function getData( $query, $params = array() );
+    public function setQuery( $query )
+    {
+        $this->query = $query;
+    }
+
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    public function execute()
+    {
+        return $this->request( $this->query, $this->parameters );
+    }
 
     public function __toString()
     {

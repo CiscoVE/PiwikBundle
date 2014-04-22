@@ -10,31 +10,150 @@ use CiscoSystems\PiwikBundle\Module\Module as Base;
  */
 class VisitSummary extends Base
 {
-    const MODULE_NAME           = 'VisitsSummary';
-    const VISITSSUMMARY         = 'get';
-    const VISITS                = 'getVisits';
-    const UNIQUEVISITORS        = 'getUniqueVisitors';
-    const ACTIONS               = 'getActions';
-    const MAXACTIONS            = 'getMaxActions';
-    const BOUNCECOUNT           = 'getBounceCount';
-    const VISITSCONVERTED       = 'getVisitsConverted';
-    const SUMVISITSLENGTH       = 'getSumVisitsLength';
-    const SUMVISITSLENGTHPRETTY = 'getSumVisitsLengthPretty';
-
     public function __construct( Request $request )
     {
-        parent::__construct( $request, self::MODULE_NAME );
+        parent::__construct( $request, 'VisitsSummary' );
     }
 
-    public function getData( $query, $params )
+    public function setQuery( $string )
     {
-        if( null !== $query )
-        {
-            return $this->request( $this->name . $query, $params );
-        }
-        else
-        {
-            return false;
-        }
+        $this->query = $this->name . $string;
+    }
+
+    /**
+     * Get a visit summary
+     *
+     * @param string $segment
+     * @param string $columns
+     */
+    public function getVisitsSummary( $segment = '', $columns = '' )
+    {
+        $this->setQuery( 'get' );
+        $this->setParameters( array(
+            'segment' => $segment,
+            'columns' => $columns,
+        ));
+
+        return $this->execute();
+    }
+
+    /**
+     * Get visits
+     *
+     * @param string $segment
+     */
+    public function getVisits( $segment = '' )
+    {
+        $this->setQuery( 'getVisits' );
+        $this->setParameters( array(
+            'segment' => $segment,
+        ));
+
+        return $this->execute();
+    }
+
+    /**
+     * Get unique visits
+     *
+     * @param string $segment
+     */
+    public function getUniqueVisitors( $segment = '' )
+    {
+        $this->setQuery( 'getUniqueVisitors' );
+        $this->setParameters( array(
+            'segment' => $segment
+        ));
+
+        return $this->execute();
+    }
+
+    /**
+     * Get actions
+     *
+     * @param string $segment
+     */
+    public function getActions( $segment = '' )
+    {
+        $this->setQuery( 'getActions' );
+        $this->setParameters( array(
+            'segment' => $segment,
+        ));
+
+        return $this->execute();
+    }
+
+    /**
+     * Get max actions
+     *
+     * @param string $segment
+     */
+    public function getMaxActions( $segment = '' )
+    {
+        $this->setQuery( 'getMaxActions' );
+        $this->setParameters( array(
+            'segment' => $segment,
+        ));
+
+        return $this->execute();
+    }
+
+    /**
+     * Get bounce count
+     *
+     * @param string $segment
+     */
+    public function getBounceCount( $segment = '' )
+    {
+        $this->setQuery( 'getBounceCount' );
+        $this->setParameters( array(
+            'segment' => $segment,
+        ));
+
+        return $this->execute();
+    }
+
+    /**
+     * Get converted visits
+     *
+     * @param string $segment
+     */
+    public function getVisitsConverted( $segment = '' )
+    {
+        $this->setQuery( 'getVisitsConverted' );
+        $this->setParameters( array(
+            'segment' => $segment,
+        ));
+
+        return $this->execute();
+    }
+
+    /**
+     * Get the sum of all visit lengths
+     *
+     * @param string $segment
+     */
+    public function getSumVisitsLength( $segment = '' )
+    {
+        $this->setQuery( 'getSumVisitsLength' );
+        $this->setParameters( array(
+            'segment' => $segment,
+        ));
+
+        return $this->execute();
+    }
+
+    /**
+     * Get the sum of all visit lengths formated in the current language
+     *
+     * @param string $segment
+     */
+    public function getSumVisitsLengthPretty( $segment = '' )
+    {
+        $this->setQuery( 'getSumVisitsLengthPretty' );
+        $this->setParameters( array(
+            'segment' => $segment,
+        ));
+
+        return $this->execute();
     }
 }

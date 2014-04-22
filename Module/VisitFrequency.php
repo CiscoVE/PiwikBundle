@@ -11,23 +11,30 @@ use CiscoSystems\PiwikBundle\Module\Module as Base;
  */
 class VisitFrequency extends Base
 {
-    const MODULE_NAME   = 'VisitFrequency';
-    const GET           = 'get';
-
     public function __construct( Request $request )
     {
-        parent::__construct( $request, self::MODULE_NAME );
+        parent::__construct( $request, 'VisitFrequency' );
     }
 
-    protected function getData( $query, $params = array() )
+    public function setQuery( $string )
     {
-        if( null !== $query )
-        {
-            return $this->request( $this->name . $query, $params );
-        }
-        else
-        {
-            return false;
-        }
+        $this->query = $this->name . $string;
+    }
+
+    /**
+     * Get the visit frequency
+     *
+     * @param string $segment
+     * @param string $columns
+     */
+    public function getVisitFrequency( $segment = '', $columns = '' )
+    {
+        $this->setQuery( 'get' );
+        $this->setParameters( array(
+            'segment' => $segment,
+            'columns' => $columns,
+        ));
+
+        return $this->execute();
     }
 }
