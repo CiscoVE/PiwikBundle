@@ -2087,7 +2087,7 @@ class Piwik
                     'currency' => $currency,
                     'group' => $group,
                     'startDate' => $startDate,
-                ) );
+                ));
     }
 
     /**
@@ -2802,225 +2802,225 @@ class Piwik
      * Get visit frequency
      */
 
-    /**
-     * Get the visit frequency
-     *
-     * @param string $segment
-     * @param string $columns
-     */
-    public function getVisitFrequency( $segment = '', $columns = '' )
-    {
-        return $this->_request( 'VisitFrequency.get', array(
-                    'segment' => $segment,
-                    'columns' => $columns,
-        ) );
-    }
+//    /**
+//     * Get the visit frequency
+//     *
+//     * @param string $segment
+//     * @param string $columns
+//     */
+//    public function getVisitFrequency( $segment = '', $columns = '' )
+//    {
+//        return $this->_request( 'VisitFrequency.get', array(
+//                    'segment' => $segment,
+//                    'columns' => $columns,
+//        ) );
+//    }
     /**
      * MODULE: VISIT TIME
      * Get visit time
      */
-
-    /**
-     * Get the visit by local time
-     *
-     * @param string $segment
-     */
-    public function getVisitLocalTime( $segment = '' )
-    {
-        return $this->_request( 'VisitTime.getVisitInformationPerLocalTime', array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get the visit by server time
-     *
-     * @param string $segment
-     * @param boolean $hideFutureHoursWhenToday Hide the future hours when the report is created for today
-     */
-    public function getVisitServerTime( $segment = '', $hideFutureHoursWhenToday = '' )
-    {
-        return $this->_request( 'VisitTime.getVisitInformationPerServerTime', array(
-                    'segment' => $segment,
-                    'hideFutureHoursWhenToday' => $hideFutureHoursWhenToday,
-        ) );
-    }
-
-    /**
-     * Get the visit by server time
-     *
-     * @param string $segment
-     */
-    public function getByDayOfWeek( $segment = '' )
-    {
-        return $this->_request( 'VisitTime.getByDayOfWeek', array(
-                    'segment' => $segment,
-        ) );
-    }
+//
+//    /**
+//     * Get the visit by local time
+//     *
+//     * @param string $segment
+//     */
+//    public function getVisitLocalTime( $segment = '' )
+//    {
+//        return $this->_request( 'VisitTime.getVisitInformationPerLocalTime', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get the visit by server time
+//     *
+//     * @param string $segment
+//     * @param boolean $hideFutureHoursWhenToday Hide the future hours when the report is created for today
+//     */
+//    public function getVisitServerTime( $segment = '', $hideFutureHoursWhenToday = '' )
+//    {
+//        return $this->_request( 'VisitTime.getVisitInformationPerServerTime', array(
+//                    'segment' => $segment,
+//                    'hideFutureHoursWhenToday' => $hideFutureHoursWhenToday,
+//        ) );
+//    }
+//
+//    /**
+//     * Get the visit by server time
+//     *
+//     * @param string $segment
+//     */
+//    public function getByDayOfWeek( $segment = '' )
+//    {
+//        return $this->_request( 'VisitTime.getByDayOfWeek', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
     /**
      * MODULE: VISITOR INTEREST
      * Get the interests of the visitor
      */
-
-    /**
-     * Get the number of visits per visit duration
-     *
-     * @param string $segment
-     */
-    public function getNumberOfVisitsPerDuration( $segment = '' )
-    {
-        return $this->_request( 'VisitorInterest.getNumberOfVisitsPerVisitDuration', array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get the number of visits per visited page
-     *
-     * @param string $segment
-     */
-    public function getNumberOfVisitsPerPage( $segment = '' )
-    {
-        return $this->_request( 'VisitorInterest.getNumberOfVisitsPerPage', array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get the number of days elapsed since the last visit
-     *
-     * @param string $segment
-     */
-    public function getNumberOfVisitsByDaySinceLast( $segment = '' )
-    {
-        return $this->_request( 'VisitorInterest.getNumberOfVisitsByDaysSinceLast', array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get the number of visits by visit count
-     *
-     * @param string $segment
-     */
-    public function getNumberOfVisitsByCount( $segment = '' )
-    {
-        return $this->_request( 'VisitorInterest.getNumberOfVisitsByVisitCount', array(
-                    'segment' => $segment,
-        ) );
-    }
+//
+//    /**
+//     * Get the number of visits per visit duration
+//     *
+//     * @param string $segment
+//     */
+//    public function getNumberOfVisitsPerDuration( $segment = '' )
+//    {
+//        return $this->_request( 'VisitorInterest.getNumberOfVisitsPerVisitDuration', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get the number of visits per visited page
+//     *
+//     * @param string $segment
+//     */
+//    public function getNumberOfVisitsPerPage( $segment = '' )
+//    {
+//        return $this->_request( 'VisitorInterest.getNumberOfVisitsPerPage', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get the number of days elapsed since the last visit
+//     *
+//     * @param string $segment
+//     */
+//    public function getNumberOfVisitsByDaySinceLast( $segment = '' )
+//    {
+//        return $this->_request( 'VisitorInterest.getNumberOfVisitsByDaysSinceLast', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get the number of visits by visit count
+//     *
+//     * @param string $segment
+//     */
+//    public function getNumberOfVisitsByCount( $segment = '' )
+//    {
+//        return $this->_request( 'VisitorInterest.getNumberOfVisitsByVisitCount', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
     /**
      * MODULE: VISITS SUMMARY
      * Get visit summary information
      */
 
-    /**
-     * Get a visit summary
-     *
-     * @param string $segment
-     * @param string $columns
-     */
-    public function getVisitsSummary( $segment = '', $columns = '' )
-    {
-        return $this->_request( 'VisitsSummary.get', array(
-                    'segment' => $segment,
-                    'columns' => $columns,
-        ) );
-    }
-
-    /**
-     * Get visits
-     *
-     * @param string $segment
-     */
-    public function getVisits( $segment = '' )
-    {
-        return $this->_request( 'VisitsSummary.getVisits', array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get unique visits
-     *
-     * @param string $segment
-     */
-    public function getUniqueVisitors( $segment = '' )
-    {
-        return $this->_request( 'VisitsSummary.getUniqueVisitors', array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get actions
-     *
-     * @param string $segment
-     */
-    public function getActions( $segment = '' )
-    {
-        return $this->_request( 'VisitsSummary.getActions', array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get max actions
-     *
-     * @param string $segment
-     */
-    public function getMaxActions( $segment = '' )
-    {
-        return $this->_request( 'VisitsSummary.getMaxActions', array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get bounce count
-     *
-     * @param string $segment
-     */
-    public function getBounceCount( $segment = '' )
-    {
-        return $this->_request( 'VisitsSummary.getBounceCount', array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get converted visits
-     *
-     * @param string $segment
-     */
-    public function getVisitsConverted( $segment = '' )
-    {
-        return $this->_request( 'VisitsSummary.getVisitsConverted', array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get the sum of all visit lengths
-     *
-     * @param string $segment
-     */
-    public function getSumVisitsLength( $segment = '' )
-    {
-        return $this->_request( 'VisitsSummary.getSumVisitsLength', array(
-                    'segment' => $segment,
-        ) );
-    }
-
-    /**
-     * Get the sum of all visit lengths formated in the current language
-     *
-     * @param string $segment
-     */
-    public function getSumVisitsLengthPretty( $segment = '' )
-    {
-        return $this->_request( 'VisitsSummary.getSumVisitsLengthPretty', array(
-                    'segment' => $segment,
-        ) );
-    }
+//    /**
+//     * Get a visit summary
+//     *
+//     * @param string $segment
+//     * @param string $columns
+//     */
+//    public function getVisitsSummary( $segment = '', $columns = '' )
+//    {
+//        return $this->_request( 'VisitsSummary.get', array(
+//                    'segment' => $segment,
+//                    'columns' => $columns,
+//        ) );
+//    }
+//
+//    /**
+//     * Get visits
+//     *
+//     * @param string $segment
+//     */
+//    public function getVisits( $segment = '' )
+//    {
+//        return $this->_request( 'VisitsSummary.getVisits', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get unique visits
+//     *
+//     * @param string $segment
+//     */
+//    public function getUniqueVisitors( $segment = '' )
+//    {
+//        return $this->_request( 'VisitsSummary.getUniqueVisitors', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get actions
+//     *
+//     * @param string $segment
+//     */
+//    public function getActions( $segment = '' )
+//    {
+//        return $this->_request( 'VisitsSummary.getActions', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get max actions
+//     *
+//     * @param string $segment
+//     */
+//    public function getMaxActions( $segment = '' )
+//    {
+//        return $this->_request( 'VisitsSummary.getMaxActions', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get bounce count
+//     *
+//     * @param string $segment
+//     */
+//    public function getBounceCount( $segment = '' )
+//    {
+//        return $this->_request( 'VisitsSummary.getBounceCount', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get converted visits
+//     *
+//     * @param string $segment
+//     */
+//    public function getVisitsConverted( $segment = '' )
+//    {
+//        return $this->_request( 'VisitsSummary.getVisitsConverted', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get the sum of all visit lengths
+//     *
+//     * @param string $segment
+//     */
+//    public function getSumVisitsLength( $segment = '' )
+//    {
+//        return $this->_request( 'VisitsSummary.getSumVisitsLength', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
+//
+//    /**
+//     * Get the sum of all visit lengths formated in the current language
+//     *
+//     * @param string $segment
+//     */
+//    public function getSumVisitsLengthPretty( $segment = '' )
+//    {
+//        return $this->_request( 'VisitsSummary.getSumVisitsLengthPretty', array(
+//                    'segment' => $segment,
+//        ) );
+//    }
 }

@@ -12,21 +12,21 @@ use Buzz\Client\Curl;
 class HttpConnection extends PiwikConnection
 {
     protected $browser;
-    protected $apiUrl;
+    protected $url;
 
     /**
      * Initialize client.
      *
-     * @param string  $apiUrl  base API URL
+     * @param string  $url  base API URL
      * @param Browser $browser Buzz Browser instance (optional)
      */
-    public function __construct( $apiUrl, Browser $browser = null )
+    public function __construct( $url, Browser $browser = null )
     {
         $this->browser = ( null === $browser ) ?
                 new Browser( new Curl() ) :
                 $browser;
 
-        $this->apiUrl = $apiUrl;
+        $this->url = $url;
     }
 
     /**
@@ -36,7 +36,7 @@ class HttpConnection extends PiwikConnection
     {
         $params['module'] = 'API';
 
-        $url = $this->apiUrl . '?' . $this->convertParamsToQuery( $params );
+        $url = $this->url . '?' . $this->convertParamsToQuery( $params );
 
 //        ladybug_dump_die( $url );
 

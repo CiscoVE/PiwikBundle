@@ -1,6 +1,6 @@
 <?php
 
-namespace CiscoSystems\PiwikBundle\Tracker;
+namespace CiscoSystems\PiwikBundle\Connection;
 
 /**
  * Description of Request
@@ -9,6 +9,13 @@ namespace CiscoSystems\PiwikBundle\Tracker;
  */
 class Request
 {
+    protected $method;
+
+    public function __construct( $method )
+    {
+        $this->method = $method;
+    }
+
     /**
      * Make API request
      *
@@ -65,7 +72,7 @@ class Request
      */
     private function parseUrl( $method, array $params = array() )
     {
-        $params = array(
+        $params = array_merge( $params, array(
             'module'        => 'API',
             'method'        => $method,
             'token_auth'    => $this->_token,
@@ -73,25 +80,16 @@ class Request
             'period'        => $this->_period,
             'format'        => $this->_format,
             'language'      => $this->_language,
-                ) + $params;
+        ));
 
-        if( $this->_period != self::PERIOD_RANGE )
-        {
-            $params = $params + array(
-                'date' => $this->_date,
-            );
-        }
-        else
-        {
-            $params = $params + array(
-                'date' => $this->_rangeStart . ',' . $this->_rangeEnd,
-            );
-        }
+        $params['date'] = ( $this->_period != self::PERIOD_RANGE ) ?
+                $this->_date :
+                $this->_rangeStart . ',' . $this->_rangeEnd;
 
         $url = $this->_site;
 
         $i = 0;
-        foreach( $params as $param => $val )
+        foreach( $params as $key => $val )
         {
             if( !empty( $val ) )
             {
@@ -100,7 +98,7 @@ class Request
                 else $url .= '?';
 
                 if( is_array( $val ) ) $val = implode( ',', $val );
-                $url .= $param . '=' . $val;
+                $url .= $key . '=' . $val;
             }
         }
 

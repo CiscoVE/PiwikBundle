@@ -2,66 +2,35 @@
 
 namespace CiscoSystems\PiwikBundle\Module;
 
+use CiscoSystems\PiwikBundle\Connection\Request;
+use CiscoSystems\PiwikBundle\Module\Module as Base;
+
 /**
- * Description of VisitorInterest
- *
- * @author tam
+ * MODULE: VISITOR INTEREST
+ * Get the interests of the visitor
  */
-class VisitorInterest
+class VisitorInterest extends Base
 {
-    protected $segment;
-    protected $numberOfVisitsPerVisitDuration;
-    protected $numberOfVisitPerPage;
-    protected $numberOfVistsByDaySinceLast;
-    protected $numberOfVistsByVisitCount;
-    protected $request;
+    const MODULE_NAME                       = 'VisitorInterest';
+    const NUMBEROFVISITSPERVISITDURATION    = 'getNumberOfVisitsPerVisitDuration';
+    const NUMBEROFVISITSPERPAGE             = 'getNumberOfVisitsPerPage';
+    const NUMEROFVISITSPERDAYSINCELAST      = 'getNumberOfVisitsByDaysSinceLast';
+    const NUMBEROFVISITSBYVISITCOUNT        = 'getNumberOfVisitsByVisitCount';
 
-    public function __construct( Request $request, $segment )
+    public function __construct( $request )
     {
-        $this->request = $request;
-        $this->segment = $segment;
+        parent::__construct( $request, self::MODULE_NAME );
     }
 
-    public function getNumberOfVisitsPerDuration( $segment = '' )
+    public function getData( $query, $params )
     {
-        return $this->request( 'VisitorInterest.getNumberOfVisitsPerVisitDuration', array(
-                    'segment' => $segment,
-        ));
-    }
-
-    /**
-     * Get the number of visits per visited page
-     *
-     * @param string $segment
-     */
-    public function getNumberOfVisitsPerPage( $segment = '' )
-    {
-        return $this->request( 'VisitorInterest.getNumberOfVisitsPerPage', array(
-                    'segment' => $segment,
-        ));
-    }
-
-    /**
-     * Get the number of days elapsed since the last visit
-     *
-     * @param string $segment
-     */
-    public function getNumberOfVisitsByDaySinceLast( $segment = '' )
-    {
-        return $this->request( 'VisitorInterest.getNumberOfVisitsByDaysSinceLast', array(
-                    'segment' => $segment,
-        ));
-    }
-
-    /**
-     * Get the number of visits by visit count
-     *
-     * @param string $segment
-     */
-    public function getNumberOfVisitsByCount( $segment = '' )
-    {
-        return $this->request( 'VisitorInterest.getNumberOfVisitsByVisitCount', array(
-                    'segment' => $segment,
-        ));
+        if( null !== $query )
+        {
+            return $this->request( $this->name . $query, $params );
+        }
+        else
+        {
+            return false;
+        }
     }
 }
