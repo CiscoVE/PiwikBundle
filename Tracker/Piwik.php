@@ -1376,38 +1376,38 @@ class Piwik
      * MODULE: LIVE
      * Request live data
      */
-
-    /**
-     * Get a short information about the visit counts in the last minutes
-     *
-     * @param int $lastMinutes Default: 60
-     * @param string $segment
-     */
-    public function getCounters( $lastMinutes = 60, $segment = '' )
-    {
-        return $this->_request( 'Live.getCounters', array(
-                    'lastMinutes' => $lastMinutes,
-                    'segment' => $segment,
-                ) );
-    }
-
-    /**
-     * Get information about the last visits
-     *
-     * @param string $segment
-     * @param int $filterLimit
-     * @param int $maxIdVisit
-     * @param string $minTimestamp
-     */
-    public function getLastVisitsDetails( $segment = '', $filter_limit = '', $maxIdVisit = '', $minTimestamp = '' )
-    {
-        return $this->_request( 'Live.getLastVisitsDetails', array(
-                    'segment' => $segment,
-                    'filter_limit' => $filter_limit,
-                    'maxIdVisit' => $maxIdVisit,
-                    'minTimestamp' => $minTimestamp,
-                ) );
-    }
+//
+//    /**
+//     * Get a short information about the visit counts in the last minutes
+//     *
+//     * @param int $lastMinutes Default: 60
+//     * @param string $segment
+//     */
+//    public function getCounters( $lastMinutes = 60, $segment = '' )
+//    {
+//        return $this->_request( 'Live.getCounters', array(
+//                    'lastMinutes' => $lastMinutes,
+//                    'segment' => $segment,
+//                ) );
+//    }
+//
+//    /**
+//     * Get information about the last visits
+//     *
+//     * @param string $segment
+//     * @param int $filterLimit
+//     * @param int $maxIdVisit
+//     * @param string $minTimestamp
+//     */
+//    public function getLastVisitsDetails( $segment = '', $filter_limit = '', $maxIdVisit = '', $minTimestamp = '' )
+//    {
+//        return $this->_request( 'Live.getLastVisitsDetails', array(
+//                    'segment' => $segment,
+//                    'filter_limit' => $filter_limit,
+//                    'maxIdVisit' => $maxIdVisit,
+//                    'minTimestamp' => $minTimestamp,
+//                ) );
+//    }
     /**
      * MODULE: MOBILEMESSAGING
      * The MobileMessaging API lets you manage and access all the MobileMessaging plugin features including : - manage SMS API credential - activate phone numbers - check remaining credits - send SMS
