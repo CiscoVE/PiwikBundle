@@ -1412,125 +1412,125 @@ class Piwik
      * MODULE: MOBILEMESSAGING
      * The MobileMessaging API lets you manage and access all the MobileMessaging plugin features including : - manage SMS API credential - activate phone numbers - check remaining credits - send SMS
      */
-
-    /**
-     * Checks if SMSAPI has been configured
-     *
-     * @return mixed
-     */
-    public function areSMSAPICredentialProvided()
-    {
-        return $this->_request( 'MobileMessaging.areSMSAPICredentialProvided' );
-    }
-
-    /**
-     * Get
-     *
-     * @return mixed
-     */
-    public function getSMSProvider()
-    {
-        return $this->_request( 'MobileMessaging.getSMSProvider' );
-    }
-
-    /**
-     * Set SMSAPI credentials
-     *
-     * @param string $provider
-     * @param string $apiKey
-     * @return mixed
-     */
-    public function setSMSAPICredential( $provider, $apiKey )
-    {
-        return $this->_request( 'MobileMessaging.setSMSAPICredential', array(
-                    'provider' => $provider,
-                    'apiKey' => $apiKey,
-                ) );
-    }
-
-    /**
-     * Add phone number
-     *
-     * @param string $phoneNumber
-     * @return mixed
-     */
-    public function addPhoneNumber( $phoneNumber )
-    {
-        return $this->_request( 'MobileMessaging.addPhoneNumber', array(
-                    'phoneNumber' => $phoneNumber,
-                ) );
-    }
-
-    /**
-     * Get credits left
-     *
-     * @return mixed
-     */
-    public function getCreditLeft()
-    {
-        return $this->_request( 'MobileMessaging.getCreditLeft' );
-    }
-
-    /**
-     * Remove phone number
-     *
-     * @param string $phoneNumber
-     * @return mixed
-     */
-    public function removePhoneNumber( $phoneNumber )
-    {
-        return $this->_request( 'MobileMessaging.removePhoneNumber', array(
-                    'phoneNumber' => $phoneNumber,
-                ) );
-    }
-
-    /**
-     * Validate phone number
-     *
-     * @param string $phoneNumber
-     * @param string $verificationCode
-     * @return mixed
-     */
-    public function validatePhoneNumber( $phoneNumber, $verificationCode )
-    {
-        return $this->_request( 'MobileMessaging.validatePhoneNumber', array(
-                    'phoneNumber' => $phoneNumber,
-                    'verificationCode' => $verificationCode,
-                ) );
-    }
-
-    /**
-     * Delete SMSAPI credentials
-     *
-     * @return mixed
-     */
-    public function deleteSMSAPICredential()
-    {
-        return $this->_request( 'MobileMessaging.deleteSMSAPICredential' );
-    }
-    /*     * *
-     * Set unknown
-     *
-     * @param $delegatedManagement
-     * @return mixed
-     */
-
-    public function setDelegatedManagement( $delegatedManagement )
-    {
-        return $this->_request( 'MobileMessaging.setDelegatedManagement', array(
-                    'delegatedManagement' => $delegatedManagement,
-                ) );
-    }
-
-    /**
-     * Get unknown
-     *
-     * @return mixed
-     */
-    public function getDelegatedManagement()
-    {
-        return $this->_request( 'MobileMessaging.getDelegatedManagement' );
-    }
+//
+//    /**
+//     * Checks if SMSAPI has been configured
+//     *
+//     * @return mixed
+//     */
+//    public function areSMSAPICredentialProvided()
+//    {
+//        return $this->_request( 'MobileMessaging.areSMSAPICredentialProvided' );
+//    }
+//
+//    /**
+//     * Get
+//     *
+//     * @return mixed
+//     */
+//    public function getSMSProvider()
+//    {
+//        return $this->_request( 'MobileMessaging.getSMSProvider' );
+//    }
+//
+//    /**
+//     * Set SMSAPI credentials
+//     *
+//     * @param string $provider
+//     * @param string $apiKey
+//     * @return mixed
+//     */
+//    public function setSMSAPICredential( $provider, $apiKey )
+//    {
+//        return $this->_request( 'MobileMessaging.setSMSAPICredential', array(
+//                    'provider' => $provider,
+//                    'apiKey' => $apiKey,
+//                ) );
+//    }
+//
+//    /**
+//     * Add phone number
+//     *
+//     * @param string $phoneNumber
+//     * @return mixed
+//     */
+//    public function addPhoneNumber( $phoneNumber )
+//    {
+//        return $this->_request( 'MobileMessaging.addPhoneNumber', array(
+//                    'phoneNumber' => $phoneNumber,
+//                ) );
+//    }
+//
+//    /**
+//     * Get credits left
+//     *
+//     * @return mixed
+//     */
+//    public function getCreditLeft()
+//    {
+//        return $this->_request( 'MobileMessaging.getCreditLeft' );
+//    }
+//
+//    /**
+//     * Remove phone number
+//     *
+//     * @param string $phoneNumber
+//     * @return mixed
+//     */
+//    public function removePhoneNumber( $phoneNumber )
+//    {
+//        return $this->_request( 'MobileMessaging.removePhoneNumber', array(
+//                    'phoneNumber' => $phoneNumber,
+//                ) );
+//    }
+//
+//    /**
+//     * Validate phone number
+//     *
+//     * @param string $phoneNumber
+//     * @param string $verificationCode
+//     * @return mixed
+//     */
+//    public function validatePhoneNumber( $phoneNumber, $verificationCode )
+//    {
+//        return $this->_request( 'MobileMessaging.validatePhoneNumber', array(
+//                    'phoneNumber' => $phoneNumber,
+//                    'verificationCode' => $verificationCode,
+//                ) );
+//    }
+//
+//    /**
+//     * Delete SMSAPI credentials
+//     *
+//     * @return mixed
+//     */
+//    public function deleteSMSAPICredential()
+//    {
+//        return $this->_request( 'MobileMessaging.deleteSMSAPICredential' );
+//    }
+//    /*     * *
+//     * Set unknown
+//     *
+//     * @param $delegatedManagement
+//     * @return mixed
+//     */
+//
+//    public function setDelegatedManagement( $delegatedManagement )
+//    {
+//        return $this->_request( 'MobileMessaging.setDelegatedManagement', array(
+//                    'delegatedManagement' => $delegatedManagement,
+//                ) );
+//    }
+//
+//    /**
+//     * Get unknown
+//     *
+//     * @return mixed
+//     */
+//    public function getDelegatedManagement()
+//    {
+//        return $this->_request( 'MobileMessaging.getDelegatedManagement' );
+//    }
     /**
      * MODULE: MULTI SITES
      * Get information about multiple sites
