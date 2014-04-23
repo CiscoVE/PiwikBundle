@@ -1097,156 +1097,156 @@ class Piwik
      * MODULE: GOALS
      * Handle goals
      */
-
-    /**
-     * Get all goals
-     */
-    public function getGoals()
-    {
-        return $this->_request( 'Goals.getGoals' );
-    }
-
-    /**
-     * Add a goal
-     *
-     * @param string $name
-     * @param string $matchAttribute
-     * @param string $pattern
-     * @param string $patternType
-     * @param boolean $caseSensitive
-     * @param float $revenue
-     * @param boolean $allowMultipleConversionsPerVisit
-     */
-    public function addGoal( $name, $matchAttribute, $pattern, $patternType, $caseSensitive = '', $revenue = '', $allowMultipleConversionsPerVisit = '' )
-    {
-        return $this->_request( 'Goals.addGoal', array(
-                    'name' => $name,
-                    'matchAttribute' => $matchAttribute,
-                    'pattern' => $pattern,
-                    'patternType' => $patternType,
-                    'caseSensitive' => $caseSensitive,
-                    'revenue' => $revenue,
-                    'allowMultipleConversionsPerVisit' => $allowMultipleConversionsPerVisit,
-                ) );
-    }
-
-    /**
-     * Update a goal
-     *
-     * @param int $idGoal
-     * @param string $name
-     * @param string $matchAttribute
-     * @param string $pattern
-     * @param string $patternType
-     * @param boolean $caseSensitive
-     * @param float $revenue
-     * @param boolean $allowMultipleConversionsPerVisit
-     */
-    public function updateGoal( $idGoal, $name, $matchAttribute, $pattern, $patternType, $caseSensitive = '', $revenue = '', $allowMultipleConversionsPerVisit = '' )
-    {
-        return $this->_request( 'Goals.updateGoal', array(
-                    'idGoal' => $idGoal,
-                    'name' => $name,
-                    'matchAttribute' => $matchAttribute,
-                    'pattern' => $pattern,
-                    'patternType' => $patternType,
-                    'caseSensitive' => $caseSensitive,
-                    'revenue' => $revenue,
-                    'allowMultipleConversionsPerVisit' => $allowMultipleConversionsPerVisit,
-                ) );
-    }
-
-    /**
-     * Delete a goal
-     *
-     * @param int $idGoal
-     */
-    public function deleteGoal( $idGoal )
-    {
-        return $this->_request( 'Goals.deleteGoal', array(
-                    'idGoal' => $idGoal,
-                ) );
-    }
-
-    /**
-     * Get the SKU of the items
-     *
-     * @param boolean abandonedCarts
-     */
-    public function getItemsSku( $abandonedCarts )
-    {
-        return $this->_request( 'Goals.getItemsSku', array(
-                    'abandonedCarts' => $abandonedCarts,
-                ) );
-    }
-
-    /**
-     * Get the name of the items
-     *
-     * @param boolean abandonedCarts
-     */
-    public function getItemsName( $abandonedCarts )
-    {
-        return $this->_request( 'Goals.getItemsName', array(
-                    'abandonedCarts' => $abandonedCarts,
-                ) );
-    }
-
-    /**
-     * Get the categories of the items
-     *
-     * @param boolean abandonedCarts
-     */
-    public function getItemsCategory( $abandonedCarts )
-    {
-        return $this->_request( 'Goals.getItemsCategory', array(
-                    'abandonedCarts' => $abandonedCarts,
-                ) );
-    }
-
-    /**
-     * Get conversion rates from a goal
-     *
-     * @param string $segment
-     * @param int $idGoal
-     * @param array $columns
-     */
-    public function getGoal( $segment = '', $idGoal = '', $columns = array() )
-    {
-        return $this->_request( 'Goals.get', array(
-                    'segment' => $segment,
-                    'idGoal' => $idGoal,
-                    'columns' => $columns,
-                ) );
-    }
-
-    /**
-     * Get information about a time period and it's conversion rates
-     *
-     * @param string $segment
-     * @param int $idGoal
-     */
-    public function getDaysToConversion( $segment = '', $idGoal = '' )
-    {
-        return $this->_request( 'Goals.getDaysToConversion', array(
-                    'segment' => $segment,
-                    'idGoal' => $idGoal,
-                ) );
-    }
-
-    /**
-     * Get information about how many site visits create a conversion
-     *
-     * @param string $segment
-     * @param int $idGoal
-     */
-    public function getVisitsUntilConversion( $segment = '', $idGoal = '' )
-    {
-        return $this->_request( 'Goals.getVisitsUntilConversion', array(
-                    'segment' => $segment,
-                    'idGoal' => $idGoal,
-                ) );
-    }
+//
+//    /**
+//     * Get all goals
+//     */
+//    public function getGoals()
+//    {
+//        return $this->_request( 'Goals.getGoals' );
+//    }
+//
+//    /**
+//     * Add a goal
+//     *
+//     * @param string $name
+//     * @param string $matchAttribute
+//     * @param string $pattern
+//     * @param string $patternType
+//     * @param boolean $caseSensitive
+//     * @param float $revenue
+//     * @param boolean $allowMultipleConversionsPerVisit
+//     */
+//    public function addGoal( $name, $matchAttribute, $pattern, $patternType, $caseSensitive = '', $revenue = '', $allowMultipleConversionsPerVisit = '' )
+//    {
+//        return $this->_request( 'Goals.addGoal', array(
+//                    'name' => $name,
+//                    'matchAttribute' => $matchAttribute,
+//                    'pattern' => $pattern,
+//                    'patternType' => $patternType,
+//                    'caseSensitive' => $caseSensitive,
+//                    'revenue' => $revenue,
+//                    'allowMultipleConversionsPerVisit' => $allowMultipleConversionsPerVisit,
+//                ) );
+//    }
+//
+//    /**
+//     * Update a goal
+//     *
+//     * @param int $idGoal
+//     * @param string $name
+//     * @param string $matchAttribute
+//     * @param string $pattern
+//     * @param string $patternType
+//     * @param boolean $caseSensitive
+//     * @param float $revenue
+//     * @param boolean $allowMultipleConversionsPerVisit
+//     */
+//    public function updateGoal( $idGoal, $name, $matchAttribute, $pattern, $patternType, $caseSensitive = '', $revenue = '', $allowMultipleConversionsPerVisit = '' )
+//    {
+//        return $this->_request( 'Goals.updateGoal', array(
+//                    'idGoal' => $idGoal,
+//                    'name' => $name,
+//                    'matchAttribute' => $matchAttribute,
+//                    'pattern' => $pattern,
+//                    'patternType' => $patternType,
+//                    'caseSensitive' => $caseSensitive,
+//                    'revenue' => $revenue,
+//                    'allowMultipleConversionsPerVisit' => $allowMultipleConversionsPerVisit,
+//                ) );
+//    }
+//
+//    /**
+//     * Delete a goal
+//     *
+//     * @param int $idGoal
+//     */
+//    public function deleteGoal( $idGoal )
+//    {
+//        return $this->_request( 'Goals.deleteGoal', array(
+//                    'idGoal' => $idGoal,
+//                ) );
+//    }
+//
+//    /**
+//     * Get the SKU of the items
+//     *
+//     * @param boolean abandonedCarts
+//     */
+//    public function getItemsSku( $abandonedCarts )
+//    {
+//        return $this->_request( 'Goals.getItemsSku', array(
+//                    'abandonedCarts' => $abandonedCarts,
+//                ) );
+//    }
+//
+//    /**
+//     * Get the name of the items
+//     *
+//     * @param boolean abandonedCarts
+//     */
+//    public function getItemsName( $abandonedCarts )
+//    {
+//        return $this->_request( 'Goals.getItemsName', array(
+//                    'abandonedCarts' => $abandonedCarts,
+//                ) );
+//    }
+//
+//    /**
+//     * Get the categories of the items
+//     *
+//     * @param boolean abandonedCarts
+//     */
+//    public function getItemsCategory( $abandonedCarts )
+//    {
+//        return $this->_request( 'Goals.getItemsCategory', array(
+//                    'abandonedCarts' => $abandonedCarts,
+//                ) );
+//    }
+//
+//    /**
+//     * Get conversion rates from a goal
+//     *
+//     * @param string $segment
+//     * @param int $idGoal
+//     * @param array $columns
+//     */
+//    public function getGoal( $segment = '', $idGoal = '', $columns = array() )
+//    {
+//        return $this->_request( 'Goals.get', array(
+//                    'segment' => $segment,
+//                    'idGoal' => $idGoal,
+//                    'columns' => $columns,
+//                ) );
+//    }
+//
+//    /**
+//     * Get information about a time period and it's conversion rates
+//     *
+//     * @param string $segment
+//     * @param int $idGoal
+//     */
+//    public function getDaysToConversion( $segment = '', $idGoal = '' )
+//    {
+//        return $this->_request( 'Goals.getDaysToConversion', array(
+//                    'segment' => $segment,
+//                    'idGoal' => $idGoal,
+//                ) );
+//    }
+//
+//    /**
+//     * Get information about how many site visits create a conversion
+//     *
+//     * @param string $segment
+//     * @param int $idGoal
+//     */
+//    public function getVisitsUntilConversion( $segment = '', $idGoal = '' )
+//    {
+//        return $this->_request( 'Goals.getVisitsUntilConversion', array(
+//                    'segment' => $segment,
+//                    'idGoal' => $idGoal,
+//                ) );
+//    }
     /**
      * MODULE: IMAGE GRAPH
      * Generate png graphs
@@ -1298,80 +1298,80 @@ class Piwik
      * MODULE: LANGUAGES MANAGER
      * Manage languages
      */
-
-    /**
-     * Proofe if language is available
-     *
-     * @param string $languageCode
-     */
-    public function getLanguageAvailable( $languageCode )
-    {
-        return $this->_request( 'LanguagesManager.isLanguageAvailable', array(
-                    'languageCode' => $languageCode,
-                ) );
-    }
-
-    /**
-     * Get all available languages
-     */
-    public function getAvailableLanguages()
-    {
-        return $this->_request( 'LanguagesManager.getAvailableLanguages' );
-    }
-
-    /**
-     * Get all available languages with information
-     */
-    public function getAvailableLanguagesInfo()
-    {
-        return $this->_request( 'LanguagesManager.getAvailableLanguagesInfo' );
-    }
-
-    /**
-     * Get all available languages with their names
-     */
-    public function getAvailableLanguageNames()
-    {
-        return $this->_request( 'LanguagesManager.getAvailableLanguageNames' );
-    }
-
-    /**
-     * Get translations for a language
-     *
-     * @param string $languageCode
-     */
-    public function getTranslations( $languageCode )
-    {
-        return $this->_request( 'LanguagesManager.getTranslationsForLanguage', array(
-                    'languageCode' => $languageCode,
-                ) );
-    }
-
-    /**
-     * Get the language for the user with the login $login
-     *
-     * @param string $login
-     */
-    public function getLanguageForUser( $login )
-    {
-        return $this->_request( 'LanguagesManager.getLanguageForUser', array(
-                    'login' => $login,
-                ) );
-    }
-
-    /**
-     * Set the language for the user with the login $login
-     *
-     * @param string $login
-     * @param string $languageCode
-     */
-    public function setLanguageForUser( $login, $languageCode )
-    {
-        return $this->_request( 'LanguagesManager.setLanguageForUser', array(
-                    'login' => $login,
-                    'languageCode' => $languageCode,
-                ) );
-    }
+//
+//    /**
+//     * Proofe if language is available
+//     *
+//     * @param string $languageCode
+//     */
+//    public function getLanguageAvailable( $languageCode )
+//    {
+//        return $this->_request( 'LanguagesManager.isLanguageAvailable', array(
+//                    'languageCode' => $languageCode,
+//                ) );
+//    }
+//
+//    /**
+//     * Get all available languages
+//     */
+//    public function getAvailableLanguages()
+//    {
+//        return $this->_request( 'LanguagesManager.getAvailableLanguages' );
+//    }
+//
+//    /**
+//     * Get all available languages with information
+//     */
+//    public function getAvailableLanguagesInfo()
+//    {
+//        return $this->_request( 'LanguagesManager.getAvailableLanguagesInfo' );
+//    }
+//
+//    /**
+//     * Get all available languages with their names
+//     */
+//    public function getAvailableLanguageNames()
+//    {
+//        return $this->_request( 'LanguagesManager.getAvailableLanguageNames' );
+//    }
+//
+//    /**
+//     * Get translations for a language
+//     *
+//     * @param string $languageCode
+//     */
+//    public function getTranslations( $languageCode )
+//    {
+//        return $this->_request( 'LanguagesManager.getTranslationsForLanguage', array(
+//                    'languageCode' => $languageCode,
+//                ) );
+//    }
+//
+//    /**
+//     * Get the language for the user with the login $login
+//     *
+//     * @param string $login
+//     */
+//    public function getLanguageForUser( $login )
+//    {
+//        return $this->_request( 'LanguagesManager.getLanguageForUser', array(
+//                    'login' => $login,
+//                ) );
+//    }
+//
+//    /**
+//     * Set the language for the user with the login $login
+//     *
+//     * @param string $login
+//     * @param string $languageCode
+//     */
+//    public function setLanguageForUser( $login, $languageCode )
+//    {
+//        return $this->_request( 'LanguagesManager.setLanguageForUser', array(
+//                    'login' => $login,
+//                    'languageCode' => $languageCode,
+//                ) );
+//    }
     /**
      * MODULE: LIVE
      * Request live data
