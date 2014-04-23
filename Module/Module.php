@@ -70,7 +70,7 @@ abstract class Module
 
     public function setQuery( $query )
     {
-        $this->query = $query;
+        $this->query = $this->name . $query;
     }
 
     public function getQuery()

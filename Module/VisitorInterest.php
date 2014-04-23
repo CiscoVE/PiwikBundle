@@ -16,11 +16,6 @@ class VisitorInterest extends Base
         parent::__construct( $request, 'VisitorInterest' );
     }
 
-    public function setQuery( $query )
-    {
-        $this->query = $this->name . $query;
-    }
-
     /**
      * Get the number of visits per visit duration
      *

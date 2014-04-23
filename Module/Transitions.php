@@ -16,11 +16,6 @@ class Transitions extends Base
         parent::__construct( $request, 'Transitions' );
     }
 
-    public function setQuery( $query )
-    {
-        $this->query = $this->name . $query;
-    }
-
     /**
      * Get transitions for a page title
      *

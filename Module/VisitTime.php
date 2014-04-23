@@ -16,11 +16,6 @@ class VisitTime extends Base
         parent::__construct( $request, 'VisitTime' );
     }
 
-    public function setQuery( $string )
-    {
-        $this->query = $this->name . $string;
-    }
-
     /**
      * Get the visit by local time
      *
@@ -28,7 +23,7 @@ class VisitTime extends Base
      */
     public function getVisitLocalTime( $segment = '' )
     {
-        $this->setQuery('getVisitInformationPerLocalTime' );
+        $this->setQuery( 'getVisitInformationPerLocalTime' );
         $this->setParameters( array(
             'segment' => $segment,
         ));

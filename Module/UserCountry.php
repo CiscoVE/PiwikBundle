@@ -16,11 +16,6 @@ class UserCountry extends Base
         parent::__construct( $request, 'UserCountry' );
     }
 
-    public function setQuery( $query )
-    {
-        $this->query = $this->name . $query;
-    }
-
     /**
      * Get countries of all visitors
      *

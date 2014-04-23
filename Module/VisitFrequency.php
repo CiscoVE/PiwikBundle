@@ -16,11 +16,6 @@ class VisitFrequency extends Base
         parent::__construct( $request, 'VisitFrequency' );
     }
 
-    public function setQuery( $string )
-    {
-        $this->query = $this->name . $string;
-    }
-
     /**
      * Get the visit frequency
      *

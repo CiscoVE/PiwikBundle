@@ -15,11 +15,6 @@ class VisitSummary extends Base
         parent::__construct( $request, 'VisitsSummary' );
     }
 
-    public function setQuery( $string )
-    {
-        $this->query = $this->name . $string;
-    }
-
     /**
      * Get a visit summary
      *
