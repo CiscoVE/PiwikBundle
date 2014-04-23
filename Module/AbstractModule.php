@@ -4,7 +4,7 @@ namespace CiscoSystems\PiwikBundle\Module;
 
 use CiscoSystems\PiwikBundle\Connection\Request;
 
-abstract class Module
+abstract class AbstractModule
 {
     protected $request;
     protected $name;

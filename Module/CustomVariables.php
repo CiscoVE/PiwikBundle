@@ -3,7 +3,7 @@
 namespace CiscoSystems\PiwikBundle\Module;
 
 use CiscoSystems\PiwikBundle\Connection\Request;
-use CiscoSystems\PiwikBundle\Module\Module as Base;
+use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
  * MODULE: CUSTOM VARIABLES
