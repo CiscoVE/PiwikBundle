@@ -15,7 +15,7 @@ class MultiSites extends Base
 {
     public function __construct( Request $request )
     {
-        parent::__construct( $request, 'MobileMessaging' );
+        parent::__construct( $request, 'MultiSites' );
     }
 
     /**
@@ -28,13 +28,14 @@ class MultiSites extends Base
     {
         $this->setQuery( 'getAll' );
         $this->setParameters( array(
+            'period'    => $period,
+            'date'      => $date,
             'segment'   => $segment,
             'enhanced'  => $enhanced,
+            'pattern'   => $pattern,
         ));
-        return $this->_request( 'MultiSites.getAll', array(
-                    'segment' => $segment,
-                    'enhanced' => $enhanced,
-                ) );
+
+        return $this->execute();
     }
 
     /**
@@ -45,9 +46,15 @@ class MultiSites extends Base
      */
     public function getOne( $idSite, $period, $date, $segment = '', $enhanced = '' )
     {
-        return $this->_request( 'MultiSites.getOne', array(
-                    'segment' => $segment,
-                    'enhanced' => $enhanced,
-                ) );
+        $this->setQuery( 'getOne' );
+        $this->setParameters( array(
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
+            'enhanced'  => $enhanced,
+        ));
+
+        return $this->execute();
     }
 }

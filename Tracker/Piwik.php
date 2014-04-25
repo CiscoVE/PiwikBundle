@@ -52,16 +52,17 @@ class Piwik
      */
     function __construct( $site, $token, $siteId, $format = self::FORMAT_JSON, $period = self::PERIOD_DAY, $date = self::DATE_YESTERDAY, $rangeStart = '', $rangeEnd = null )
     {
-        $this->site = $site;
-        $this->token = $token;
-        $this->siteId = $siteId;
-        $this->format = $format;
-        $this->period = self::PERIOD_DAY;
-        $this->rangeStart = $rangeStart;
-        $this->rangeEnd = $rangeEnd;
+        $this->site         = $site;
+        $this->token        = $token;
+        $this->siteId       = $siteId;
+        $this->format       = $format;
+        $this->period       = $period;
+        $this->rangeStart   = $rangeStart;
+        $this->rangeEnd     = $rangeEnd;
 
-        if( !empty( $rangeStart ) ) $this->setRange( $rangeStart, $rangeEnd );
-        else $this->setDate( $date );
+        !empty( $rangeStart ) ?
+            $this->setRange( $rangeStart, $rangeEnd ) :
+            $this->setDate( $date );
     }
     /**
      * Getter & Setter
@@ -1535,34 +1536,34 @@ class Piwik
      * MODULE: MULTI SITES
      * Get information about multiple sites
      */
-
-    /**
-     * Get information about multiple sites
-     *
-     * @param string $segment
-     * @param string $enhanced
-     */
-    public function getMultiSites( $segment = '', $enhanced = '' )
-    {
-        return $this->_request( 'MultiSites.getAll', array(
-                    'segment' => $segment,
-                    'enhanced' => $enhanced,
-                ) );
-    }
-
-    /**
-     * Get key metrics about one of the sites the user manages
-     *
-     * @param string $segment
-     * @param string $enhanced
-     */
-    public function getOne( $segment = '', $enhanced = '' )
-    {
-        return $this->_request( 'MultiSites.getOne', array(
-                    'segment' => $segment,
-                    'enhanced' => $enhanced,
-                ) );
-    }
+//
+//    /**
+//     * Get information about multiple sites
+//     *
+//     * @param string $segment
+//     * @param string $enhanced
+//     */
+//    public function getMultiSites( $segment = '', $enhanced = '' )
+//    {
+//        return $this->_request( 'MultiSites.getAll', array(
+//                    'segment' => $segment,
+//                    'enhanced' => $enhanced,
+//                ) );
+//    }
+//
+//    /**
+//     * Get key metrics about one of the sites the user manages
+//     *
+//     * @param string $segment
+//     * @param string $enhanced
+//     */
+//    public function getOne( $segment = '', $enhanced = '' )
+//    {
+//        return $this->_request( 'MultiSites.getOne', array(
+//                    'segment' => $segment,
+//                    'enhanced' => $enhanced,
+//                ) );
+//    }
     /**
      * MODULE: PDF REPORST
      * Manage pdf reports

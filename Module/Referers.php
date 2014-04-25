@@ -6,8 +6,20 @@ use CiscoSystems\PiwikBundle\Connection\Request;
 use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
- * MODULE: REFERERS
- * Get information about the referers
+ * MODULE: Referers
+ *
+ * @see http://developer.piwik.org/api-reference/reporting-api#toc-metric-definitions
+ *
+ * The Referrers API lets you access reports about Websites, Search engines,
+ * Keywords, Campaigns used to access your website. For example, "getKeywords"
+ * returns all search engine keywords (with general analytics metrics for each
+ * keyword), "getWebsites" returns referrer websites (along with the full
+ * Referrer URL if the parameter &expanded=1 is set). "getReferrerType" returns
+ * the Referrer overview report. "getCampaigns" returns the list of all
+ * campaigns (and all campaign keywords if the parameter &expanded=1 is set).
+ * The methods "getKeywordsForPageUrl" and "getKeywordsForPageTitle" are used
+ * to output the top keywords used to find a page. Check out the widget "Top
+ * keywords used to find this page" that you can easily re-use on your website.
  */
 class Referers extends Base
 {
@@ -22,12 +34,31 @@ class Referers extends Base
      * @param string $segment
      * @param string $typeReferer
      */
-    public function getRefererType( $segment = '', $typeReferer = '' )
+    public function getRefererType( $idSite, $period, $date, $segment = '', $typeReferer = '', $idSubtable = '', $expanded = '' )
     {
         $this->setQuery( 'getRefererType' );
         $this->setParameters( array(
+            'idSite'        => $idSite,
+            'period'        => $period,
+            'date'          => $date,
             'segment'       => $segment,
             'typeReferer'   => $typeReferer,
+            'idSubtable'    => $idSubtable,
+            'expanded'      => $expanded,
+        ));
+
+        return $this->execute();
+    }
+
+    public function getAll( $idSite, $period, $date, $segment = '', $expanded = '' )
+    {
+        $this->setQuery( 'getAll' );
+        $this->setParameters( array(
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
+            'expanded'  => $expanded,
         ));
 
         return $this->execute();
@@ -39,10 +70,13 @@ class Referers extends Base
      * @param string $segment
      * @param string $expanded
      */
-    public function getKeywords( $segment = '', $expanded = '' )
+    public function getKeywords( $idSite, $period, $date, $segment = '', $expanded = '' )
     {
         $this->setQuery( 'getKeywords' );
         $this->setParameters( array(
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
             'segment'   => $segment,
             'expanded'  => $expanded,
         ));
@@ -55,11 +89,14 @@ class Referers extends Base
      *
      * @param string $url
      */
-    public function getKeywordsForPageUrl( $url )
+    public function getKeywordsForPageUrl( $idSite, $period, $date, $url )
     {
         $this->setQuery( 'getKeywordsForPageUrl' );
         $this->setParameters( array(
-            'url' => $url,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'url'       => $url,
         ));
 
         return $this->execute();
@@ -70,11 +107,14 @@ class Referers extends Base
      *
      * @param string $title
      */
-    public function getKeywordsForPageTitle( $title )
+    public function getKeywordsForPageTitle( $idSite, $period, $date, $title )
     {
         $this->setQuery( 'getKeywordsForPageTitle' );
         $this->setParameters( array(
-            'title' => $title,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'title'     => $title,
         ));
 
         return $this->execute();
@@ -86,10 +126,13 @@ class Referers extends Base
      * @param int $idSubtable
      * @param string $segment
      */
-    public function getSearchEnginesFromKeywordId( $idSubtable, $segment = '' )
+    public function getSearchEnginesFromKeywordId( $idSite, $period, $date, $idSubtable, $segment = '' )
     {
         $this->setQuery( 'getSearchEnginesFromKeywordId' );
         $this->setParameters( array(
+            'idSite'        => $idSite,
+            'period'        => $period,
+            'date'          => $date,
             'idSubtable'    => $idSubtable,
             'segment'       => $segment,
         ));
@@ -103,12 +146,15 @@ class Referers extends Base
      * @param string $segment
      * @param string $expanded
      */
-    public function getSearchEngines( $segment = '', $expanded = '' )
+    public function getSearchEngines( $idSite, $period, $date, $segment = '', $expanded = '' )
     {
         $this->setQuery( 'getSearchEngines' );
         $this->setParameters( array(
-            'segment'   => $segment,
-            'expanded'  => $expanded,
+            'idSite'        => $idSite,
+            'period'        => $period,
+            'date'          => $date,
+            'segment'       => $segment,
+            'expanded'      => $expanded,
         ));
 
         return $this->execute();
@@ -120,10 +166,13 @@ class Referers extends Base
      * @param int $idSubtable
      * @param string $segment
      */
-    public function getKeywordsFromSearchEngineId( $idSubtable, $segment = '' )
+    public function getKeywordsFromSearchEngineId( $idSite, $period, $date, $idSubtable, $segment = '' )
     {
         $this->setQuery( 'getKeywordsFromSearchEngineId' );
         $this->setParameters( array(
+            'idSite'        => $idSite,
+            'period'        => $period,
+            'date'          => $date,
             'segment'       => $segment,
             'idSubtable'    => $idSubtable,
         ));
