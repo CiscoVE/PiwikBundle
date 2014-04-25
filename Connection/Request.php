@@ -21,7 +21,7 @@ class Request
      *
      * @param string $method
      */
-    private function request( $method, $params = array() )
+    public function request( $method, $params = array() )
     {
         $url = $this->parseUrl( $method, $params );
         // 	var_dump($url);
@@ -45,7 +45,7 @@ class Request
      * @param string $method
      * @param array $params
      */
-    private function finishRequest( $request, $method, $params )
+    public function finishRequest( $request, $method, $params )
     {
         $valid = $this->validRequest( $request );
 
@@ -70,23 +70,23 @@ class Request
      * @param string $method The request method
      * @param array $params Request params
      */
-    private function parseUrl( $method, array $params = array() )
+    public function parseUrl( $method, array $params = array() )
     {
         $params = array_merge( $params, array(
             'module'        => 'API',
             'method'        => $method,
-            'token_auth'    => $this->_token,
-            'idSite'        => $this->_siteId,
-            'period'        => $this->_period,
-            'format'        => $this->_format,
-            'language'      => $this->_language,
+            'token_auth'    => $this->token,
+            'idSite'        => $this->siteId,
+            'period'        => $this->period,
+            'format'        => $this->format,
+            'language'      => $this->language,
         ));
 
-        $params['date'] = ( $this->_period != self::PERIOD_RANGE ) ?
-                $this->_date :
-                $this->_rangeStart . ',' . $this->_rangeEnd;
+        $params['date'] = ( $this->period != self::PERIOD_RANGE ) ?
+                $this->date :
+                $this->rangeStart . ',' . $this->rangeEnd;
 
-        $url = $this->_site;
+        $url = $this->site;
 
         $i = 0;
         foreach( $params as $key => $val )
@@ -110,7 +110,7 @@ class Request
      *
      * @param obj $request
      */
-    private function validRequest( $request )
+    public function validRequest( $request )
     {
         if( ($request !== false) and ( !is_null( $request )) )
         {
@@ -136,9 +136,9 @@ class Request
      *
      * @param obj $request
      */
-    private function parseRequest( $request )
+    public function parseRequest( $request )
     {
-        switch( $this->_format )
+        switch( $this->format )
         {
             case self::FORMAT_JSON:
                 if( strpos( $request, '{' ) != 0 ) return $request;
@@ -155,8 +155,8 @@ class Request
      *
      * @param string $msg Error message
      */
-    private function addError( $msg = '' )
+    public function addError( $msg = '' )
     {
-        $this->_errors = $this->_errors + array( $msg );
+        $this->errors = $this->errors + array( $msg );
     }
 }
