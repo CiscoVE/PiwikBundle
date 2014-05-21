@@ -7,7 +7,9 @@ use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
  * MODULE: VISIT FREQUENCY
- * Get visit frequency
+ *
+ * VisitFrequency API lets you access a list of metrics related to Returning
+ * Visitors.
  */
 class VisitFrequency extends Base
 {
@@ -22,12 +24,15 @@ class VisitFrequency extends Base
      * @param string $segment
      * @param string $columns
      */
-    public function getVisitFrequency( $segment = '', $columns = '' )
+    public function getVisitFrequency( $idSite, $period, $date, $segment = '', $columns = '' )
     {
         $this->setQuery( 'get' );
         $this->setParameters( array(
-            'segment' => $segment,
-            'columns' => $columns,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
+            'columns'   => $columns,
         ));
 
         return $this->execute();

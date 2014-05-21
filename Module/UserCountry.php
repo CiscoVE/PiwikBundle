@@ -7,7 +7,9 @@ use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
  * MODULE: USER COUNTRY
- * Get visitors country information
+ *
+ * The UserCountry API lets you access reports about your visitors'
+ * Countries and Continents.
  */
 class UserCountry extends Base
 {
@@ -21,11 +23,14 @@ class UserCountry extends Base
      *
      * @param string $segment
      */
-    public function getCountry( $segment = '' )
+    public function getCountry( $idSite, $period, $date, $segment = '' )
     {
         $this->setQuery( 'getCountry' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
         ));
 
         return $this->execute();
@@ -36,11 +41,14 @@ class UserCountry extends Base
      *
      * @param string $segment
      */
-    public function getContinent( $segment = '' )
+    public function getContinent( $idSite, $period, $date, $segment = '' )
     {
         $this->setQuery( 'getContinent' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
         ));
 
         return $this->execute();
@@ -51,11 +59,14 @@ class UserCountry extends Base
      *
      * @param string $segment
      */
-    public function getRegion( $segment = '' )
+    public function getRegion( $idSite, $period, $date, $segment = '' )
     {
         $this->setQuery( 'getRegion' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
         ));
 
         return $this->execute();
@@ -66,11 +77,25 @@ class UserCountry extends Base
      *
      * @param string $segment
      */
-    public function getCity( $segment = '' )
+    public function getCity( $idSite, $period, $date, $segment = '' )
     {
         $this->setQuery( 'getCity' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
+        ));
+
+        return $this->execute();
+    }
+
+    public function getLocation( $ip, $provider = '' )
+    {
+        $this->setQuery( 'getCity' );
+        $this->setParameters( array(
+            'ip'        => $ip,
+            'provider'  => $provider,
         ));
 
         return $this->execute();
@@ -81,11 +106,14 @@ class UserCountry extends Base
      *
      * @param string $segment
      */
-    public function getCountryNumber( $segment = '' )
+    public function getCountryNumber( $idSite, $period, $date, $segment = '' )
     {
         $this->setQuery( 'getNumberOfDistinctCountries' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
         ));
 
         return $this->execute();

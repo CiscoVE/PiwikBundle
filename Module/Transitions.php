@@ -7,6 +7,7 @@ use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
  * MODULE: TRANSITIONS
+ *
  * Get transitions for page URLs, titles and actions
  */
 class Transitions extends Base
@@ -24,11 +25,14 @@ class Transitions extends Base
      * @param string $limitBeforeGrouping
      * @return mixed
      */
-    public function getTransitionsForPageTitle( $pageTitle, $segment = '', $limitBeforeGrouping = '' )
+    public function getTransitionsForPageTitle( $pageTitle, $idSite, $period, $date, $segment = '', $limitBeforeGrouping = '' )
     {
         $this->setQuery( 'getTransitionsForPageTitle' );
         $this->setParameters( array(
             'pageTitle'             => $pageTitle,
+            'idSite'                => $idSite,
+            'period'                => $period,
+            'date'                  => $date,
             'segment'               => $segment,
             'limitBeforeGrouping'   => $limitBeforeGrouping,
         ));
@@ -44,11 +48,14 @@ class Transitions extends Base
      * @param string $limitBeforeGrouping
      * @return mixed
      */
-    public function getTransitionsForPageUrl( $pageUrl, $segment = '', $limitBeforeGrouping = '' )
+    public function getTransitionsForPageUrl( $pageUrl, $idSite, $period, $date, $segment = '', $limitBeforeGrouping = '' )
     {
         $this->setQuery( 'getTransitionsForPageTitle' );
         $this->setParameters( array(
             'pageUrl'               => $pageUrl,
+            'idSite'                => $idSite,
+            'period'                => $period,
+            'date'                  => $date,
             'segment'               => $segment,
             'limitBeforeGrouping'   => $limitBeforeGrouping,
         ));
@@ -67,16 +74,18 @@ class Transitions extends Base
      * @param bool $returnNormalizedUrls
      * @return mixed
      */
-    public function getTransitionsForAction( $actionName, $actionType, $segment = '', $limitBeforeGrouping = '', $parts = 'all', $returnNormalizedUrls = '' )
+    public function getTransitionsForAction( $actionName, $actionType, $idSite, $period, $date, $segment = '', $limitBeforeGrouping = '', $parts = 'all' )
     {
         $this->setQuery( 'getTransitionsForAction' );
         $this->setParameters( array(
             'actionName'            => $actionName,
             'actionType'            => $actionType,
+            'idSite'                => $idSite,
+            'period'                => $period,
+            'date'                  => $date,
             'segment'               => $segment,
             'limitBeforeGrouping'   => $limitBeforeGrouping,
             'parts'                 => $parts,
-            'returnNormalizedUrls'  => $returnNormalizedUrls,
         ));
 
         return $this->execute();

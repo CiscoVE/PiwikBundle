@@ -7,7 +7,9 @@ use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
  * MODULE: VISITOR INTEREST
- * Get the interests of the visitor
+ *
+ * VisitorInterest API lets you access two Visitor Engagement reports: number
+ * of visits per number of pages, and number of visits per visit duration.
  */
 class VisitorInterest extends Base
 {
@@ -21,11 +23,14 @@ class VisitorInterest extends Base
      *
      * @param string $segment
      */
-    public function getNumberOfVisitsPerDuration( $segment = '' )
+    public function getNumberOfVisitsPerDuration( $idSite, $period, $date, $segment = '' )
     {
         $this->setQuery( 'getNumberOfVisitsPerVisitDuration' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
         ));
 
         return $this->execute();
@@ -36,11 +41,14 @@ class VisitorInterest extends Base
      *
      * @param string $segment
      */
-    public function getNumberOfVisitsPerPage( $segment = '' )
+    public function getNumberOfVisitsPerPage( $idSite, $period, $date, $segment = '' )
     {
         $this->setQuery( 'getNumberOfVisitsPerPage' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
         ));
 
         return $this->execute();
@@ -51,11 +59,14 @@ class VisitorInterest extends Base
      *
      * @param string $segment
      */
-    public function getNumberOfVisitsByDaySinceLast( $segment = '' )
+    public function getNumberOfVisitsByDaySinceLast( $idSite, $period, $date, $segment = '' )
     {
         $this->setQuery( 'getNumberOfVisitsByDaysSinceLast' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
         ));
 
         return $this->execute();
@@ -66,11 +77,14 @@ class VisitorInterest extends Base
      *
      * @param string $segment
      */
-    public function getNumberOfVisitsByCount( $segment = '' )
+    public function getNumberOfVisitsByCount( $idSite, $period, $date, $segment = '' )
     {
         $this->setQuery( 'getNumberOfVisitsByVisitCount' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
         ));
 
         return $this->execute();

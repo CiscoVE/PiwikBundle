@@ -7,8 +7,18 @@ use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
  * MODULE: USER MANAGER
- * Manage piwik users
- * Description of User
+ *
+ * The UsersManager API lets you Manage Users and their permissions to access
+ * specific websites. You can create users via "addUser", update existing users
+ * via "updateUser" and delete users via "deleteUser". There are many ways to
+ * list users based on their login "getUser" and "getUsers", their email
+ * "getUserByEmail", or which users have permission (view or admin) to access
+ * the specified websites "getUsersWithSiteAccess". Existing Permissions are
+ * listed given a login via "getSitesAccessFromUser", or a website ID via
+ * "getUsersAccessFromSite", or you can list all users and websites for a given
+ * permission via "getUsersSitesFromAccess". Permissions are set and updated
+ * via the method "setUserAccess". See also the documentation about Managing
+ * Users in Piwik.
  */
 class UsersManager extends Base
 {
@@ -88,7 +98,7 @@ class UsersManager extends Base
      *
      * @param string $access
      */
-    public function getUsersSitesFromAccess( $access )
+    public function getUsersSites( $access )
     {
         $this->setQuery( 'getUsersSitesFromAccess' );
         $this->setParameters( array(
@@ -184,6 +194,35 @@ class UsersManager extends Base
             'password'  => $password,
             'email'     => $email,
             'alias'     => $alias,
+        ));
+
+        return $this->execute();
+    }
+
+    public function setSuperUserAccess( $userLogin, $hasSuperUserAccess )
+    {
+        $this->setQuery( 'setSuperUserAccess' );
+        $this->setParameters( array(
+            'userLogin' => $userLogin,
+            'hasSuperUserAccess' => $hasSuperUserAccess
+        ));
+
+        return $this->execute();
+    }
+
+    public function hasSuperUserAccess()
+    {
+        $this->setQuery( 'hasSuperUserAccess' );
+
+        return $this->execute();
+    }
+
+    public function getUsersHavingSuperAccess( $userLogin, $hasSuperUserAccess )
+    {
+        $this->setQuery( 'getUsersHavingSuperAccess' );
+        $this->setParameters( array(
+            'userLogin' => $userLogin,
+            'hasSuperUserAccess' => $hasSuperUserAccess
         ));
 
         return $this->execute();

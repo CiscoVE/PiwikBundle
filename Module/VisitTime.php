@@ -7,7 +7,9 @@ use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
  * MODULE: VISIT TIME
- * Get visit time
+ *
+ * VisitTime API lets you access reports by Hour (Server time), and by Hour
+ * Local Time of your visitors.
  */
 class VisitTime extends Base
 {
@@ -21,11 +23,14 @@ class VisitTime extends Base
      *
      * @param string $segment
      */
-    public function getVisitLocalTime( $segment = '' )
+    public function getVisitPerLocalTime( $idSite, $period, $date, $segment = '' )
     {
         $this->setQuery( 'getVisitInformationPerLocalTime' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
         ));
 
         return $this->execute();
@@ -37,11 +42,14 @@ class VisitTime extends Base
      * @param string $segment
      * @param boolean $hideFutureHoursWhenToday Hide the future hours when the report is created for today
      */
-    public function getVisitServerTime( $segment = '', $hideFutureHoursWhenToday = '' )
+    public function getVisitPerServerTime( $idSite, $period, $date, $segment = '', $hideFutureHoursWhenToday = '' )
     {
         $this->setQuery( 'getVisitInformationPerServerTime' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
             'hideFutureHoursWhenToday' => $hideFutureHoursWhenToday
         ));
 
@@ -53,11 +61,14 @@ class VisitTime extends Base
      *
      * @param string $segment
      */
-    public function getByDayOfWeek( $segment = '' )
+    public function getByDayOfWeek( $idSite, $period, $date, $segment = '' )
     {
         $this->setQuery( 'getByDayOfWeek' );
         $this->setParameters( array(
-            'segment' => $segment,
+            'idSite'    => $idSite,
+            'period'    => $period,
+            'date'      => $date,
+            'segment'   => $segment,
         ));
 
         return $this->execute();
