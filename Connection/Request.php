@@ -2,18 +2,32 @@
 
 namespace CiscoSystems\PiwikBundle\Connection;
 
-/**
- * Description of Request
- *
- * @author tam
- */
+use Buzz\Browser;
+use Buzz\Client;
+use Buzz\Message\Request;
+use Buzz\Message\Response;
+
 class Request
 {
-    protected $method;
+    protected $url;
+    protected $request;
+    protected $response;
 
-    public function __construct( $method )
+    public function __construct( $url, Request $request )
     {
-        $this->method = $method;
+        $this->url = $url;
+        $this->request = $request->setHost( $url );
+        $this->response = $response;
+    }
+
+    public function post( $host )
+    {
+        
+    }
+
+    public function get()
+    {
+
     }
 
     /**

@@ -10,33 +10,34 @@ namespace CiscoSystems\PiwikBundle\Tracker;
  */
 class Piwik
 {
-    const ERROR_INVALID = 10;
-    const ERROR_EMPTY = 11;
-    const PERIOD_DAY = 'day';
-    const PERIOD_WEEK = 'week';
-    const PERIOD_MONTH = 'month';
-    const PERIOD_YEAR = 'year';
-    const PERIOD_RANGE = 'range';
-    const DATE_TODAY = 'today';
-    const DATE_YESTERDAY = 'yesterday';
-    const FORMAT_XML = 'xml';
-    const FORMAT_JSON = 'json';
-    const FORMAT_CSV = 'csv';
-    const FORMAT_TSV = 'tsv';
-    const FORMAT_HTML = 'html';
-    const FORMAT_RSS = 'rss';
-    const FORMAT_PHP = 'php';
-    private $site = '';
-    private $token = '';
-    private $siteId = 0;
-    private $format = self::FORMAT_PHP;
-    private $language = 'en';
-    private $period = self::PERIOD_DAY;
-    private $date = '';
+    const ERROR_INVALID     = 10;
+    const ERROR_EMPTY       = 11;
+    const PERIOD_DAY        = 'day';
+    const PERIOD_WEEK       = 'week';
+    const PERIOD_MONTH      = 'month';
+    const PERIOD_YEAR       = 'year';
+    const PERIOD_RANGE      = 'range';
+    const DATE_TODAY        = 'today';
+    const DATE_YESTERDAY    = 'yesterday';
+    const FORMAT_XML        = 'xml';
+    const FORMAT_JSON       = 'json';
+    const FORMAT_CSV        = 'csv';
+    const FORMAT_TSV        = 'tsv';
+    const FORMAT_HTML       = 'html';
+    const FORMAT_RSS        = 'rss';
+    const FORMAT_PHP        = 'php';
+
+    private $site       = '';
+    private $token      = '';
+    private $siteId     = 0;
+    private $format     = self::FORMAT_PHP;
+    private $language   = 'en';
+    private $period     = self::PERIOD_DAY;
+    private $date       = '';
     private $rangeStart = 'yesterday';
-    private $rangeEnd = null;
-    private $limit = '';
-    private $errors = array();
+    private $rangeEnd   = null;
+    private $limit      = '';
+    private $errors     = array();
 
     /**
      * Create new instance

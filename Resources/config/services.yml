@@ -1,28 +1,31 @@
 parameters:
-    piwik.client.class:                 CiscoSystems\PiwikBundle\Tracker\Client
-    piwik.client.token:                 null
-    piwik.connection.http.class:       CiscoSystems\PiwikBundle\Connection\HttpConnection
-    piwik.connection.http.url:          null
-    piwik.connection.piwik.class:       CiscoSystems\PiwikBundle\Connection\PiwikConnection
-    piwik.connection.piwik.init:        false
-    piwik.connectionstub.class:         CiscoSystems\PiwikBundle\Connection\StubConnection
+    cisco.piwik.request.class:                CiscoSystems\PiwikBundle\Connection\Request
+    cisco.piwik.client.class:                 CiscoSystems\PiwikBundle\Tracker\Client
+    cisco.piwik.client.token:                 null
+    cisco.piwik.connection.http.class:       CiscoSystems\PiwikBundle\Connection\HttpConnection
+    cisco.piwik.connection.http.url:          null
+    cisco.piwik.connection.piwik.class:       CiscoSystems\PiwikBundle\Connection\PiwikConnection
+    cisco.piwik.connection.piwik.init:        false
+    cisco.piwik.connectionstub.class:         CiscoSystems\PiwikBundle\Connection\StubConnection
 
 services:
-    piwik.client:
-        class: '%piwik.client.class%'
+    cisco.piwik.request:
+        class: '%cisco.piwik.request.class%'
+    cisco.piwik.client:
+        class: '%cisco.piwik.client.class%'
         arguments:
-            - '@piwik.connection.http'
-            - '%piwik.client.token%'
+            - '@cisco.piwik.connection.http'
+            - '%cisco.piwik.client.token%'
 
-    piwik.connection.http:
-        class: '%piwik.connection.http.class%'
+    cisco.piwik.connection.http:
+        class: '%cisco.piwik.connection.http.class%'
         arguments:
-            - %piwik.connection.http.url%
+            - %cisco.piwik.connection.http.url%
 
-    piwik.connection.piwik:
-        class: '%piwik.connection.piwik.class%'
+    cisco.piwik.connection.piwik:
+        class: '%cisco.piwik.connection.piwik.class%'
         arguments:
-            - '%piwik.connection.piwik.init%'
+            - '%cisco.piwik.connection.piwik.init%'
 
-    piwik.connection.stub:
-        class: '%piwik.connectionstub.class%'
+    cisco.piwik.connection.stub:
+        class: '%cisco.piwik.connectionstub.class%'

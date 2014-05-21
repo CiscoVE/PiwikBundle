@@ -26,8 +26,9 @@ class CiscoSystemsPiwikExtension extends Extension
     {
         $fileLocator = new FileLocator( __DIR__ . '/../Resources/config' );
         $loader = new Loader\YamlFileLoader( $container, $fileLocator );
-
-        if( !$container->hasDefinition( 'piwik.client' ) )
+        $loader->load( 'piwik.yml' );
+        
+        if( !$container->hasDefinition( 'cisco.piwik.client' ) )
         {
             $loader->load( 'services.yml' );
         }
@@ -36,7 +37,7 @@ class CiscoSystemsPiwikExtension extends Extension
 
         if( isset( $config['connection'] ))
         {
-            $definition = $container->getDefinition( 'piwik.client' );
+            $definition = $container->getDefinition( 'cisco.piwik.client' );
             $arguments = $definition->getArguments();
             $arguments[0] = new Reference( $config['connection'] );
             $definition->setArguments( $arguments );
@@ -44,17 +45,17 @@ class CiscoSystemsPiwikExtension extends Extension
 
         if( isset( $config['url'] ))
         {
-            $container->setParameter( 'piwik.connection.http.url', $config['url'] );
+            $container->setParameter( 'cisco.piwik.connection.http.url', $config['url'] );
         }
 
         if( isset( $config['init'] ))
         {
-            $container->setParameter( 'piwik.connection.piwik.init', ( bool ) $config['init'] );
+            $container->setParameter( 'cisco.piwik.connection.piwik.init', ( bool ) $config['init'] );
         }
 
         if( isset( $config['token'] ))
         {
-            $container->setParameter( 'piwik.client.token', $config['token'] );
+            $container->setParameter( 'cisco.piwik.client.token', $config['token'] );
         }
     }
 

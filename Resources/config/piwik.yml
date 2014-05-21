@@ -1,0 +1,47 @@
+parameters:
+    cisco.piwik.config:
+        api:
+            getPiwikVersion:
+                arguments:  ~
+            getSettings:
+                arguments:  ~
+            getDefaultMetricTranslations:
+                arguments:  ~
+            getSegmentsMetadata:
+                arguments:
+                    isSites:
+                        type: array
+                        value: empty
+            getLogoUrl:
+                arguments:
+                    pathOnly:
+                        type: string
+                        value: ''
+            getHeaderLogoUrl:
+                arguments:
+                    pathOnly:
+                        type: string
+                        value: ''
+            getMetadata:
+                arguments:
+                    idSite:
+                    apiModule:
+                    apiAction:
+                    apiParameters:
+                        type: array
+                        value: ''
+                    language:
+                        type: string
+                        value: ''
+                    period:
+                        type: string
+                        value: ''
+                    date:
+                        type: string
+                        value: ''
+                    hideMetricsDoc:
+                        type: string
+                        value: ''
+                    showSubtableReports:
+                        type: string
+                        value: ''
