@@ -1,6 +1,6 @@
 <?php
 
-namespace CiscoSystems\PiwikBundle\Exception;
+namespace CiscoSystems\PiwikBundle\Error;
 
 /**
  * Description of Exception
