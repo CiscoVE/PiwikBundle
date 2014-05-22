@@ -17,17 +17,7 @@ class Request
     {
         $this->url = $url;
         $this->request = $request->setHost( $url );
-        $this->response = $response;
-    }
-
-    public function post( $host )
-    {
-        
-    }
-
-    public function get()
-    {
-
+        $this->response = new Response();
     }
 
     /**
@@ -45,9 +35,7 @@ class Request
         curl_setopt( $handle, CURLOPT_RETURNTRANSFER, 1 );
         $buffer = curl_exec( $handle );
         curl_close( $handle );
-
-        if( !empty( $buffer ) ) $request = $this->parseRequest( $buffer );
-        else $request = false;
+        $request = ( !empty( $buffer ) ) ? $this->parseRequest( $buffer ) : false;
 
         return $this->finishRequest( $request, $method, $params );
     }
@@ -65,11 +53,7 @@ class Request
 
         if( $valid === true )
         {
-            if( isset( $request->value ) ) return $request->value;
-            else
-            {
-                return $request;
-            }
+            return ( isset( $request->value ) ) ? $request->value : $request;
         }
         else
         {
@@ -108,10 +92,8 @@ class Request
             if( !empty( $val ) )
             {
                 $i++;
-                if( $i > 1 ) $url .= '&';
-                else $url .= '?';
-
-                if( is_array( $val ) ) $val = implode( ',', $val );
+                $url .= ( $i > 1 ) ? '&' : '?';
+                if( is_array( $val ) ) { $val = implode( ',', $val ); }
                 $url .= $key . '=' . $val;
             }
         }
@@ -135,14 +117,8 @@ class Request
             return $request->message;
         }
 
-        if( is_null( $request ) )
-        {
-            return self::ERROR_EMPTY;
-        }
-        else
-        {
-            return self::ERROR_INVALID;
-        }
+        return ( is_null( $request ) ) ?
+                self::ERROR_EMPTY : self::ERROR_INVALID;
     }
 
     /**
@@ -156,21 +132,9 @@ class Request
         {
             case self::FORMAT_JSON:
                 if( strpos( $request, '{' ) != 0 ) return $request;
-
                 return json_decode( $request );
-                break;
             default:
                 return $request;
         }
-    }
-
-    /**
-     * Add error
-     *
-     * @param string $msg Error message
-     */
-    public function addError( $msg = '' )
-    {
-        $this->errors = $this->errors + array( $msg );
     }
 }
