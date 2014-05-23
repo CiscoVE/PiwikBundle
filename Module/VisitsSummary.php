@@ -73,7 +73,7 @@ class VisitsSummary extends Base
      *
      * @param string $segment
      */
-    public function getActions( $idSite, $period, $date, $segment = '' )
+    public function getActions( $segment = '' )
     {
         $this->setQuery( 'getActions' );
         $this->setParameters( array(
@@ -88,7 +88,7 @@ class VisitsSummary extends Base
      *
      * @param string $segment
      */
-    public function getMaxActions( $idSite, $period, $date, $segment = '' )
+    public function getMaxActions( $segment = '' )
     {
         $this->setQuery( 'getMaxActions' );
         $this->setParameters( array(
@@ -106,13 +106,10 @@ class VisitsSummary extends Base
      *
      * @param string $segment
      */
-    public function getBounceCount( $idSite, $period, $date, $segment = '' )
+    public function getBounceCount( $segment = '' )
     {
         $this->setQuery( 'getBounceCount' );
         $this->setParameters( array(
-            'idSite'    => $idSite,
-            'period'    => $period,
-            'date'      => $date,
             'segment'   => $segment,
         ));
 
@@ -124,13 +121,10 @@ class VisitsSummary extends Base
      *
      * @param string $segment
      */
-    public function getVisitsConverted( $idSite, $period, $date, $segment = '' )
+    public function getVisitsConverted( $segment = '' )
     {
         $this->setQuery( 'getVisitsConverted' );
         $this->setParameters( array(
-            'idSite'    => $idSite,
-            'period'    => $period,
-            'date'      => $date,
             'segment'   => $segment,
         ));
 
@@ -142,13 +136,10 @@ class VisitsSummary extends Base
      *
      * @param string $segment
      */
-    public function getSumVisitsLength( $idSite, $period, $date, $segment = '' )
+    public function getSumVisitsLength( $segment = '' )
     {
         $this->setQuery( 'getSumVisitsLength' );
         $this->setParameters( array(
-            'idSite'    => $idSite,
-            'period'    => $period,
-            'date'      => $date,
             'segment'   => $segment,
         ));
 
@@ -160,13 +151,10 @@ class VisitsSummary extends Base
      *
      * @param string $segment
      */
-    public function getSumVisitsLengthPretty( $idSite, $period, $date, $segment = '' )
+    public function getSumVisitsLengthPretty( $segment = '' )
     {
         $this->setQuery( 'getSumVisitsLengthPretty' );
         $this->setParameters( array(
-            'idSite'    => $idSite,
-            'period'    => $period,
-            'date'      => $date,
             'segment'   => $segment,
         ));
 
