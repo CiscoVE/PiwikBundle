@@ -2,7 +2,7 @@
 
 namespace CiscoSystems\PiwikBundle\Module;
 
-use CiscoSystems\PiwikBundle\Tracker\Piwik;
+use CiscoSystems\PiwikBundle\Model\Piwik;
 use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
@@ -26,13 +26,10 @@ class VisitsSummary extends Base
         parent::__construct( $piwik, 'VisitsSummary' );
     }
 
-    public function get( $idSite, $period, $date, $segment = '', $columns = '' )
+    public function get( $segment = '', $columns = '' )
     {
         $this->setQuery( 'get' );
         $this->setParameters( array(
-            'idSite'    => $idSite,
-            'period'    => $period,
-            'date'      => $date,
             'segment'   => $segment,
             'columns'   => $columns,
         ));
@@ -46,13 +43,10 @@ class VisitsSummary extends Base
      *
      * @param string $segment
      */
-    public function getVisits( $idSite, $period, $date, $segment = '' )
+    public function getVisits( $segment = '' )
     {
         $this->setQuery( 'getVisits' );
         $this->setParameters( array(
-            'idSite'    => $idSite,
-            'period'    => $period,
-            'date'      => $date,
             'segment'   => $segment,
         ));
 
@@ -64,13 +58,10 @@ class VisitsSummary extends Base
      *
      * @param string $segment
      */
-    public function getUniqueVisitors( $idSite, $period, $date, $segment = '' )
+    public function getUniqueVisitors( $segment = '' )
     {
         $this->setQuery( 'getUniqueVisitors' );
         $this->setParameters( array(
-            'idSite'    => $idSite,
-            'period'    => $period,
-            'date'      => $date,
             'segment'   => $segment
         ));
 
@@ -86,9 +77,6 @@ class VisitsSummary extends Base
     {
         $this->setQuery( 'getActions' );
         $this->setParameters( array(
-            'idSite'    => $idSite,
-            'period'    => $period,
-            'date'      => $date,
             'segment'   => $segment,
         ));
 

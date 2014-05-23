@@ -2,18 +2,18 @@
 
 namespace CiscoSystems\PiwikBundle\Module;
 
-use CiscoSystems\PiwikBundle\Tracker\Piwik;
+use CiscoSystems\PiwikBundle\Model\Piwik;
 
 abstract class AbstractModule
 {
-    protected $request;
+    protected $piwik;
     protected $name;
     protected $parameters;
     protected $query;
 
-    public function __construct( Piwik $request, $name )
+    public function __construct( Piwik $piwik, $name )
     {
-        $this->request = $request;
+        $this->piwik = $piwik;
         $this->name = $name;
         $this->parameters = array();
     }
@@ -28,14 +28,14 @@ abstract class AbstractModule
         $this->name = $name;
     }
 
-    public function getRequest()
+    public function getPiwik()
     {
-        return $this->request;
+        return $this->piwik;
     }
 
     public function setRequest( $request )
     {
-        $this->request = $request;
+        $this->piwik = $request;
     }
 
     public function getParameters()
@@ -70,7 +70,7 @@ abstract class AbstractModule
 
     public function setQuery( $query )
     {
-        $this->query = $this->name . $query;
+        $this->query = $this->name . '.' . $query;
     }
 
     public function getQuery()
@@ -80,7 +80,7 @@ abstract class AbstractModule
 
     public function execute()
     {
-        return $this->request( $this->query, $this->parameters );
+        return $this->piwik->request( $this->query, $this->parameters );
     }
 
     public function __toString()

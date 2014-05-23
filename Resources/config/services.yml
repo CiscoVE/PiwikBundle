@@ -1,5 +1,5 @@
 parameters:
-    cisco.piwik.client.class:                  CiscoSystems\PiwikBundle\Tracker\Piwik
+    cisco.piwik.client.class:                  CiscoSystems\PiwikBundle\Model\Piwik
     cisco.piwik.client.token:                   null
     cisco.piwik.client.url:                     null
     cisco.piwik.client.site_id:                 0

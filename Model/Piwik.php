@@ -1,6 +1,6 @@
 <?php
 
-namespace CiscoSystems\PiwikBundle\Tracker;
+namespace CiscoSystems\PiwikBundle\Model;
 
 /**
 
@@ -312,6 +312,9 @@ class Piwik
      */
     public function request( $method, $params = array() )
     {
+
+//        ladybug_dump_die( $method, $params );
+
         $url = $this->parseUrl( $method, $params );
         // 	var_dump($url);
         $handle = curl_init();
