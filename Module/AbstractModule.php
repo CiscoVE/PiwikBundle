@@ -2,7 +2,7 @@
 
 namespace CiscoSystems\PiwikBundle\Module;
 
-use CiscoSystems\PiwikBundle\Connection\Request;
+use CiscoSystems\PiwikBundle\Tracker\Piwik;
 
 abstract class AbstractModule
 {
@@ -11,7 +11,7 @@ abstract class AbstractModule
     protected $parameters;
     protected $query;
 
-    public function __construct( Request $request, $name )
+    public function __construct( Piwik $request, $name )
     {
         $this->request = $request;
         $this->name = $name;

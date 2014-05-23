@@ -1,31 +1,37 @@
 parameters:
-    cisco.piwik.request.class:                CiscoSystems\PiwikBundle\Connection\Request
-    cisco.piwik.client.class:                 CiscoSystems\PiwikBundle\Tracker\Client
-    cisco.piwik.client.token:                 null
-    cisco.piwik.connection.http.class:       CiscoSystems\PiwikBundle\Connection\HttpConnection
-    cisco.piwik.connection.http.url:          null
-    cisco.piwik.connection.piwik.class:       CiscoSystems\PiwikBundle\Connection\PiwikConnection
-    cisco.piwik.connection.piwik.init:        false
-    cisco.piwik.connectionstub.class:         CiscoSystems\PiwikBundle\Connection\StubConnection
+    cisco.piwik.client.class:                  CiscoSystems\PiwikBundle\Tracker\Piwik
+    cisco.piwik.client.token:                   null
+    cisco.piwik.client.url:                     null
+    cisco.piwik.client.site_id:                 0
+    cisco.piwik.client.format:                  null
+
+    cisco.piwik.module.api.class:               CiscoSystems\PiwikBundle\Module\API
+    cisco.piwik.module.actions.class:           CiscoSystems\PiwikBundle\Module\Actions
+    cisco.piwik.module.annotations.class:       CiscoSystems\PiwikBundle\Module\Annotations
+    cisco.piwik.module.custom_alerts.class:     CiscoSystems\PiwikBundle\Module\CustomAlerts
+    cisco.piwik.module.custom_variables.class:  CiscoSystems\PiwikBundle\Module\CustomVariables
+    cisco.piwik.module.dashboard.class:          CiscoSystems\PiwikBundle\Module\Dashboard
+    cisco.piwik.module.device_detection.class:  CiscoSystems\PiwikBundle\Module\DeviceDetection
+    cisco.piwik.module.events.class:             CiscoSystems\PiwikBundle\Module\Events
+    cisco.piwik.module.example_api.class:       CiscoSystems\PiwikBundle\Module\ExampleAPI
+    cisco.piwik.module.goals.class:             CiscoSystems\PiwikBundle\Module\Goals
+    cisco.piwik.module.image_graph.class:       CiscoSystems\PiwikBundle\Module\ImageGraph
+    cisco.piwik.module.languages_manager.class: CiscoSystems\PiwikBundle\Module\LanguagesManager
+    cisco.piwik.module.live.class:                CiscoSystems\PiwikBundle\Module\Live
+    cisco.piwik.module.mobile_messaging.class:  CiscoSystems\PiwikBundle\Module\Live
+    cisco.piwik.module.visits_summary.class:    CiscoSystems\PiwikBundle\Module\VisitsSummary
+
 
 services:
-    cisco.piwik.request:
-        class: '%cisco.piwik.request.class%'
     cisco.piwik.client:
         class: '%cisco.piwik.client.class%'
         arguments:
-            - '@cisco.piwik.connection.http'
+            - '%cisco.piwik.client.url%'
             - '%cisco.piwik.client.token%'
+            - '%cisco.piwik.client.site_id%'
+            - '%cisco.piwik.client.format%'
 
-    cisco.piwik.connection.http:
-        class: '%cisco.piwik.connection.http.class%'
+    cisco.piwik.module.visits_summary:
+        class: '%cisco.piwik.module.visits_summary.class%'
         arguments:
-            - %cisco.piwik.connection.http.url%
-
-    cisco.piwik.connection.piwik:
-        class: '%cisco.piwik.connection.piwik.class%'
-        arguments:
-            - '%cisco.piwik.connection.piwik.init%'
-
-    cisco.piwik.connection.stub:
-        class: '%cisco.piwik.connectionstub.class%'
+            - '@cisco.piwik.client'

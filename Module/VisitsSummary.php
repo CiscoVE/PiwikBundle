@@ -2,7 +2,7 @@
 
 namespace CiscoSystems\PiwikBundle\Module;
 
-use CiscoSystems\PiwikBundle\Connection\Request;
+use CiscoSystems\PiwikBundle\Tracker\Piwik;
 use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
@@ -21,9 +21,9 @@ class VisitsSummary extends Base
      * @param string $segment
      * @param string $columns
      */
-    public function __construct( Request $request )
+    public function __construct( Piwik $piwik )
     {
-        parent::__construct( $request, 'VisitsSummary' );
+        parent::__construct( $piwik, 'VisitsSummary' );
     }
 
     public function get( $idSite, $period, $date, $segment = '', $columns = '' )
