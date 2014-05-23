@@ -1,26 +1,11 @@
 parameters:
-    cisco.piwik.client.class:                  CiscoSystems\PiwikBundle\Model\Piwik
+    cisco.piwik.client.class:                  CiscoSystems\PiwikBundle\Model\Client
     cisco.piwik.client.token:                   null
     cisco.piwik.client.url:                     null
     cisco.piwik.client.site_id:                 0
     cisco.piwik.client.format:                  null
 
-    cisco.piwik.module.api.class:               CiscoSystems\PiwikBundle\Module\API
-    cisco.piwik.module.actions.class:           CiscoSystems\PiwikBundle\Module\Actions
-    cisco.piwik.module.annotations.class:       CiscoSystems\PiwikBundle\Module\Annotations
-    cisco.piwik.module.custom_alerts.class:     CiscoSystems\PiwikBundle\Module\CustomAlerts
-    cisco.piwik.module.custom_variables.class:  CiscoSystems\PiwikBundle\Module\CustomVariables
-    cisco.piwik.module.dashboard.class:          CiscoSystems\PiwikBundle\Module\Dashboard
-    cisco.piwik.module.device_detection.class:  CiscoSystems\PiwikBundle\Module\DeviceDetection
-    cisco.piwik.module.events.class:             CiscoSystems\PiwikBundle\Module\Events
-    cisco.piwik.module.example_api.class:       CiscoSystems\PiwikBundle\Module\ExampleAPI
-    cisco.piwik.module.goals.class:             CiscoSystems\PiwikBundle\Module\Goals
-    cisco.piwik.module.image_graph.class:       CiscoSystems\PiwikBundle\Module\ImageGraph
-    cisco.piwik.module.languages_manager.class: CiscoSystems\PiwikBundle\Module\LanguagesManager
-    cisco.piwik.module.live.class:                CiscoSystems\PiwikBundle\Module\Live
-    cisco.piwik.module.mobile_messaging.class:  CiscoSystems\PiwikBundle\Module\Live
-    cisco.piwik.module.visits_summary.class:    CiscoSystems\PiwikBundle\Module\VisitsSummary
-
+    cisco.piwik.module.class:                   CiscoSystems\PiwikBundle\Model\Module
 
 services:
     cisco.piwik.client:
@@ -31,7 +16,7 @@ services:
             - '%cisco.piwik.client.site_id%'
             - '%cisco.piwik.client.format%'
 
-    cisco.piwik.module.visits_summary:
-        class: '%cisco.piwik.module.visits_summary.class%'
+    cisco.piwik.module:
+        class: '%cisco.piwik.module.class%'
         arguments:
             - '@cisco.piwik.client'

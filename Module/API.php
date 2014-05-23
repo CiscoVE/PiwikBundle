@@ -2,7 +2,7 @@
 
 namespace CiscoSystems\PiwikBundle\Module;
 
-use CiscoSystems\PiwikBundle\Connection\Request;
+use CiscoSystems\PiwikBundle\Model\Client;
 use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
@@ -27,12 +27,16 @@ use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
  *      a particular segment. It uses the Live.getLastVisitsDetails API to
  *      fetch the most recently used values, and will return the most often
  *      used values first;
+ *
+ * The Metadata API is for example used by the Piwik Mobile App to automatically
+ * display all Piwik reports, with translated report & columns names and nicely
+ * formatted values. More information on the Metadata API documentation page
  */
 class API extends Base
 {
-    public function __construct( Request $request )
+    public function __construct( Client $client )
     {
-        parent::__construct( $request, 'API' );
+        parent::__construct( $client );
     }
 
     public function getPiwikVersion()
@@ -55,36 +59,6 @@ class API extends Base
     public function getDefaultMetricTranslations()
     {
         $this->setQuery( 'getDefaultMetricTranslations' );
-
-        return $this->execute();
-    }
-
-    /**
-     * Get default metrics
-     */
-    public function getDefaultMetrics()
-    {
-        $this->setQuery( 'getDefaultMetrics' );
-
-        return $this->execute();
-    }
-
-    /**
-     * Get default processed metrics
-     */
-    public function getDefaultProcessedMetrics()
-    {
-        $this->setQuery( 'getDefaultProcessedMetrics' );
-
-        return $this->execute();
-    }
-
-    /**
-     * Get default metrics documentation
-     */
-    public function getDefaultMetricsDocumentation()
-    {
-        $this->setQuery( 'getDefaultMetricsDocumentation' );
 
         return $this->execute();
     }
@@ -142,7 +116,6 @@ class API extends Base
      * @param array $apiParameters Parameters
      */
     public function getMetadata(
-            $idSite,
             $apiModule,
             $apiAction,
             $apiParameters = array(),
@@ -155,7 +128,6 @@ class API extends Base
     {
         $this->setQuery( 'getMetadata' );
         $this->setParameters( array(
-            'idSite'                => $idSite,
             'apiModule'             => $apiModule,
             'apiAction'             => $apiAction,
             'apiParameters'         => $apiParameters,
@@ -177,18 +149,12 @@ class API extends Base
      * @param string $showSubtableReports
      */
     public function getReportMetadata(
-            $idSites = '',
-            $period = '',
-            $date = '',
             $hideMetricsDoc = '',
             $showSubtableReports = ''
     )
     {
         $this->setQuery( 'getReportMetadata' );
         $this->setParameters( array(
-            'idSites'               => $idSites,
-            'period'                => $period,
-            'date'                  => $date,
             'hideMetricsDoc'        => $hideMetricsDoc,
             'showSubtableReports'   => $showSubtableReports,
         ));

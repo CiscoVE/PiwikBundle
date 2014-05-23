@@ -1,82 +1,313 @@
 <?php
 
-namespace CiscoSystems\PiwikBundle\Tracker;
+namespace CiscoSystems\PiwikBundle\Model;
 
-use CiscoSystems\PiwikBundle\Connection\ConnectionInterface;
-use CiscoSystems\PiwikBundle\Exception\Exception;
-
+use CiscoSystems\PiwikBundle\Model\ModuleInterface;
 /**
- * Description of Client
+
+  Repository: https://github.com/VisualAppeal/Piwik-PHP-API
+  Official api reference: http://piwik.org/docs/analytics-api/reference/
+
  */
 class Client
 {
-    protected $connection;
-    protected $token;
+    const ERROR_INVALID     = 10;
+    const ERROR_EMPTY       = 11;
+
+    const PERIOD_DAY        = 'day';
+    const PERIOD_WEEK       = 'week';
+    const PERIOD_MONTH      = 'month';
+    const PERIOD_YEAR       = 'year';
+    const PERIOD_RANGE      = 'range';
+
+    const DATE_TODAY        = 'today';
+    const DATE_YESTERDAY    = 'yesterday';
+
+    const FORMAT_XML        = 'xml';
+    const FORMAT_JSON       = 'json';
+    const FORMAT_CSV        = 'csv';
+    const FORMAT_TSV        = 'tsv';
+    const FORMAT_HTML       = 'html';
+    const FORMAT_PHP        = 'php';
+    const FORMAT_RSS        = 'rss';
+    const FORMAT_ORIGINAL   = 'original';
+
+    protected $site       = '';
+    protected $token      = '';
+    protected $siteId     = 0;
+    protected $format     = self::FORMAT_PHP;
+    protected $formats  = array(
+        self::FORMAT_CSV,
+        self::FORMAT_HTML,
+        self::FORMAT_JSON,
+        self::FORMAT_ORIGINAL,
+        self::FORMAT_PHP,
+        self::FORMAT_RSS,
+        self::FORMAT_TSV,
+        self::FORMAT_XML
+    );
+    protected $language   = 'en';
+    protected $period     = self::PERIOD_DAY;
+    protected $periods    = array(
+        self::PERIOD_DAY,
+        self::PERIOD_MONTH,
+        self::PERIOD_WEEK,
+        self::PERIOD_YEAR
+    );
+    protected $date       = '';
+    protected $rangeStart = self::DATE_YESTERDAY;
+    protected $rangeEnd   = null;
+    protected $limit      = '';
+    protected $errors     = array();
 
     /**
-     * Initialize Piwik client.
+     * Create new instance
      *
-     * @param ConnectionInterface $connection Piwik active connection
-     * @param string              $token      auth token
+     * @param string $site URL of the piwik installation
+     * @param string $token API Access token
+     * @param int $siteId ID of the site
+     * @param string $format
+     * @param string $period
+     * @param string $date
+     * @param string $rangeStart
+     * @param string $rangeEnd
      */
-    public function __construct( ConnectionInterface $connection, $token = 'anonymous' )
+    function __construct( $site, $token, $siteId, $format = self::FORMAT_JSON, $period = self::PERIOD_DAY, $date = self::DATE_YESTERDAY, $rangeStart = '', $rangeEnd = null )
     {
-        $this->connection = $connection;
-        $this->token = $token;
+        $this->site         = $site;
+        $this->token        = $token;
+        $this->siteId       = $siteId;
+        $this->format       = $format;
+        $this->period       = $period;
+        $this->rangeStart   = $rangeStart;
+        $this->rangeEnd     = $rangeEnd;
+
+        !empty( $rangeStart ) ?
+            $this->setRange( $rangeStart, $rangeEnd ) :
+            $this->setDate( $date );
     }
 
-    /**
-     * Set Piwik API token.
-     *
-     * @param string $token auth token
-     */
+    public function getSite()
+    {
+        return $this->site;
+    }
+
+    public function setSite( $url )
+    {
+        $this->site = $url;
+    }
+
+    public function getToken()
+    {
+        return $this->token;
+    }
+
     public function setToken( $token )
     {
         $this->token = $token;
     }
 
-    /**
-     * Call specific method & return it's response.
-     *
-     * @param string $method method name
-     * @param array  $params method parameters
-     * @param string $format return format (php, json, xml, csv, tsv, html, rss)
-     *
-     * @return mixed
-     */
-    public function call( $method, $params = array(), $format = 'original' )
+    public function getSiteId()
     {
-        $params['method'] = $method;
-        $params['token_auth'] = $this->token;
-        $params['format'] = $format;
+        return intval( $this->siteId );
+    }
 
-        ladybug_dump( $params );
+    public function setSiteId( $id )
+    {
+        $this->siteId = $id;
+    }
 
-        $data = $this->getConnection()->send( $params );
+    public function getFormat()
+    {
+        return $this->format;
+    }
 
-        ladybug_dump_die( $data );
+    public function setFormat( $format )
+    {
+        $this->format = $format;
+    }
 
-        if( 'php' === $format )
-        {
-            $object = unserialize( $data );
-            if( isset( $object['result'] ) && 'error' === $object['result'] )
-            {
-                throw new Exception( $object['message'] );
-            }
+    public function getLanguage()
+    {
+        return $this->language;
+    }
 
-            return $object;
-        }
+    public function setLanguage( $language )
+    {
+        $this->language = $language;
+    }
 
-        return $data;
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    public function setDate( $date )
+    {
+        $this->date = $date;
+    }
+
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+    public function setPeriod( $period )
+    {
+        $this->period = $period;
+    }
+
+    public function getRange()
+    {
+        return 'from ' . $this->rangeStart . ' until '
+                . ( ( empty( $this->rangeEnd ) ) ? 'today' : $this->rangeEnd );
     }
 
     /**
-     * Return active connection.
+     * Set date range
      *
-     * @return ConnectionInterface
+     * @param string $rangeStart e.g. 2012-02-10 (YYYY-mm-dd) or last5(lastX), previous12(previousY)...
+     * @param string $rangeEnd e.g. 2012-02-12. Leave this parameter empty to request all data from $rangeStart until now
      */
-    public function getConnection()
+    public function setRange( $rangeStart, $rangeEnd = null )
     {
-        return $this->connection;
+        $this->date = '';
+        $this->rangeStart = $rangeStart;
+        $this->rangeEnd = $rangeEnd;
+
+        if( is_null( $rangeEnd ) )
+        {
+            $this->date = $rangeStart;
+        }
+    }
+
+    public function getLimit()
+    {
+        return intval( $this->limit );
+    }
+
+    public function setLimit( $limit )
+    {
+        $this->limit = $limit;
+    }
+
+    public function reset()
+    {
+        $this->period = self::PERIOD_DAY;
+        $this->date = '';
+        $this->rangeStart = 'yesterday';
+        $this->rangeEnd = null;
+
+        $this->errors = array();
+    }
+
+    public function getModule( $name )
+    {
+        return new Module( $this, $name );
+    }
+
+    public function request( $method, $params = array() )
+    {
+        $url = $this->parseUrl( $method, $params );
+        // 	var_dump($url);
+        $handle = curl_init();
+        curl_setopt( $handle, CURLOPT_URL, $url );
+        curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 5 );
+        curl_setopt( $handle, CURLOPT_RETURNTRANSFER, 1 );
+        $buffer = curl_exec( $handle );
+        curl_close( $handle );
+        $request = ( !empty( $buffer ) ) ? $this->parseRequest( $buffer ) : false;
+
+        return $this->finishRequest( $request, $method, $params );
+    }
+
+    public function finishRequest( $request, $method, $params )
+    {
+        $valid = $this->validRequest( $request );
+
+        if( $valid === true )
+        {
+            return ( isset( $request->value ) ) ? $request->value : $request;
+        }
+        else
+        {
+            $request = $this->addError( $valid . ' (' . $this->parseUrl( $method, $params ) . ')' );
+            return false;
+        }
+    }
+
+    public function parseUrl( $method, array $params = array() )
+    {
+        $params = count( $params ) > 0 ? $params[0] : $params;
+        $params = array_merge( $params, array(
+            'module'        => 'API',
+            'method'        => $method,
+            'token_auth'    => $this->token,
+            'idSite'        => $this->siteId,
+            'period'        => $this->period,
+            'format'        => $this->format,
+            'language'      => $this->language,
+        ));
+
+        $params['date'] = ( $this->period != self::PERIOD_RANGE ) ?
+                $this->date :
+                $this->rangeStart . ',' . $this->rangeEnd;
+
+        $url = $this->site;
+
+        $i = 0;
+        foreach( $params as $key => $val )
+        {
+            if( !empty( $val ) )
+            {
+                $i++;
+                $url .= ( $i > 1 ) ? '&' : '?';
+                if( is_array( $val ) ) { $val = implode( ',', $val ); }
+                $url .= $key . '=' . $val;
+            }
+        }
+
+        return $url;
+    }
+
+    public function validRequest( $request )
+    {
+        if( ($request !== false) and ( !is_null( $request )) )
+        {
+            if( !isset( $request->result ) or ( $request->result != 'error') )
+            {
+                return true;
+            }
+            return $request->message;
+        }
+
+        return ( is_null( $request ) ) ?
+                self::ERROR_EMPTY : self::ERROR_INVALID;
+    }
+
+    public function parseRequest( $request )
+    {
+        switch( $this->format )
+        {
+            case self::FORMAT_JSON:
+                return ( strpos( $request, '{' ) != 0 ) ? $request : json_decode( $request );
+            default:
+                return $request;
+        }
+    }
+
+    private function addError( $msg = '' )
+    {
+        $this->errors = $this->errors + array( $msg );
+    }
+
+    public function hasError()
+    {
+        return ( count( $this->errors ));
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
     }
 }

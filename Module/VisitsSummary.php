@@ -2,7 +2,7 @@
 
 namespace CiscoSystems\PiwikBundle\Module;
 
-use CiscoSystems\PiwikBundle\Model\Piwik;
+use CiscoSystems\PiwikBundle\Model\Client;
 use CiscoSystems\PiwikBundle\Module\AbstractModule as Base;
 
 /**
@@ -21,9 +21,9 @@ class VisitsSummary extends Base
      * @param string $segment
      * @param string $columns
      */
-    public function __construct( Piwik $piwik )
+    public function __construct( Client $client )
     {
-        parent::__construct( $piwik, 'VisitsSummary' );
+        parent::__construct( $client );
     }
 
     public function get( $segment = '', $columns = '' )
@@ -92,9 +92,6 @@ class VisitsSummary extends Base
     {
         $this->setQuery( 'getMaxActions' );
         $this->setParameters( array(
-            'idSite'    => $idSite,
-            'period'    => $period,
-            'date'      => $date,
             'segment'   => $segment,
         ));
 
