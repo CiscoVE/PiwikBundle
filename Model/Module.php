@@ -4,11 +4,13 @@ namespace CiscoSystems\PiwikBundle\Model;
 
 use CiscoSystems\PiwikBundle\Model\Client;
 
+/**
+ * @see http://developer.piwik.org/api-reference/reporting-api
+ */
 class Module
 {
     protected $client;
     protected $name;
-    protected $query;
 
     public function __construct( Client $client, $name = '' )
     {

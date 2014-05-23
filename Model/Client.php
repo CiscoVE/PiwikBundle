@@ -60,19 +60,16 @@ class Client
     protected $limit      = '';
     protected $errors     = array();
 
-    /**
-     * Create new instance
-     *
-     * @param string $site URL of the piwik installation
-     * @param string $token API Access token
-     * @param int $siteId ID of the site
-     * @param string $format
-     * @param string $period
-     * @param string $date
-     * @param string $rangeStart
-     * @param string $rangeEnd
-     */
-    function __construct( $site, $token, $siteId, $format = self::FORMAT_JSON, $period = self::PERIOD_DAY, $date = self::DATE_YESTERDAY, $rangeStart = '', $rangeEnd = null )
+    function __construct(
+            $site,
+            $token,
+            $siteId,
+            $format = self::FORMAT_JSON,
+            $period = self::PERIOD_DAY,
+            $date = self::DATE_YESTERDAY,
+            $rangeStart = '',
+            $rangeEnd = null
+    )
     {
         $this->site         = $site;
         $this->token        = $token;
@@ -163,12 +160,6 @@ class Client
                 . ( ( empty( $this->rangeEnd ) ) ? 'today' : $this->rangeEnd );
     }
 
-    /**
-     * Set date range
-     *
-     * @param string $rangeStart e.g. 2012-02-10 (YYYY-mm-dd) or last5(lastX), previous12(previousY)...
-     * @param string $rangeEnd e.g. 2012-02-12. Leave this parameter empty to request all data from $rangeStart until now
-     */
     public function setRange( $rangeStart, $rangeEnd = null )
     {
         $this->date = '';
