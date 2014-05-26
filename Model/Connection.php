@@ -2,7 +2,7 @@
 
 namespace CiscoSystems\PiwikBundle\Model;
 
-//use Buzz\Browser;
+use Symfony\Component\DomCrawler\Crawler;
 use GuzzleHttp\Client;
 
 /**
@@ -210,8 +210,8 @@ class Connection
     {
         $params = count( $params ) > 0 ? $params[0] : $params;
         $query['query'] = array_merge( $params, array(
-//            'module'        => 'Foo',
-            'module'        => 'API',
+            'module'        => 'Foo',
+//            'module'        => 'API',
             'method'        => $method,
             'token_auth'    => $this->token,
             'idSite'        => $this->siteId,
@@ -220,41 +220,19 @@ class Connection
             'language'      => $this->language,
             'date'          => (( $this->period != self::PERIOD_RANGE ) ?
                                 $this->date :
-                                $this->rangeStart . ',' . $this->rangeEnd)
+                                $this->rangeStart . ',' . $this->rangeEnd),
             ));
 
         $client = new Client();
         $response = $client->get( $this->site, $query );
-        // test
-//        $client = new Client([ 'base_url' => 'http://en.wikipedia.org' ]);
-//        $response = $client->get( '/wiki/Henry_Ford' );
-//        $response = $client->get( 'http://www.google.com/search?hl=en&q=cake' );
-        $body = $response->getBody();
-        $this->getContentType( $response );
-
-        ladybug_dump_die(
-                $response->getHeader( 'content-type' ),
-                $response->getEffectiveUrl(),
-                $response->getStatusCode(),
-                $response->getReasonPhrase(),
-                $body->getSize(), //258,658
-                $body->seek( 0 ),
-                $body->read( 258658 ),
-                $this->html( $response )
-                );
 
         try
         {
-//            $response = $client->get( $this->site, $query );
-//            $response = $client->get( 'http://www.google.com/search?hl=en&q=cake' );
+            $content = $this->getContent( $response );
 
-//            ladybug_dump_die( $response->getBody() );
-//            ladybug_dump_die( $response->getBody()->getContents() );
-//            ladybug_dump_die( $response->getEffectiveUrl(), $response->getBody()->read( 5 ) );
-
-            $json = $response->json();
-            $status = $response->getStatusCode();
-
+//            ( $this->mimeType === 'text/html' ) ?
+//                $this->addError( 'This is not a JSON file' ) :
+//                $json = $response->json();
         }
         catch( ClientErrorResponseException  $e )
         {
@@ -262,15 +240,29 @@ class Connection
             $this->addError( $e->getResponse() );
         }
 
-        return !$this->hasError() ? $json['value'] : $this->getErrors();
+//        return count( $this->errors ) === 0 ? $json['value'] : $this->getErrors();
+        return count( $this->errors ) === 0 ? $content : $this->getErrors();
     }
 
-    private function html( $response )
+    private function getContent( $response )
     {
-        $size = $response->getBody()->getSize();
-        $response->getBody()->seek( 0 );
+        $this->getContentType( $response );
+        switch( $this->mimeType ) {
+            case 'text/html':
+                $this->addError( 'Response returned an HTML message instead of a JSON or an XML' );
+                $size = $response->getBody()->getSize();
+                $response->getBody()->seek( 0 );
+                return $response->getBody()->read( $size );
+            case 'application/json':
+                return $response->json();
+            case 'application/xml':
+                return $response->xml();
+        }
+    }
 
-        return $response->getBody()->read( $size );
+    private function html( $html )
+    {
+
     }
 
     private function getContentType( $response )
@@ -287,11 +279,6 @@ class Connection
     private function addError( $msg = '' )
     {
         $this->errors = $this->errors + array( $msg );
-    }
-
-    public function hasError()
-    {
-        return ( count( $this->errors ));
     }
 
     public function getErrors()
