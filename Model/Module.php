@@ -2,7 +2,7 @@
 
 namespace CiscoSystems\PiwikBundle\Model;
 
-use CiscoSystems\PiwikBundle\Model\Client;
+use CiscoSystems\PiwikBundle\Model\Connection;
 
 /**
  * @see http://developer.piwik.org/api-reference/reporting-api
@@ -17,12 +17,12 @@ use CiscoSystems\PiwikBundle\Model\Client;
  */
 class Module
 {
-    protected $client;
+    protected $connection;
     protected $name;
 
-    public function __construct( Client $client, $name = '' )
+    public function __construct( Connection $connection, $name = '' )
     {
-        $this->client = $client;
+        $this->connection = $connection;
         $this->name = $name;
     }
 
@@ -40,7 +40,7 @@ class Module
 
     public function __call( $method, $arguments )
     {
-        return $this->client->request( $this->name . '.' . $method, $arguments );
+        return $this->connection->request( $this->name . '.' . $method, $arguments );
     }
 
     public function __toString()

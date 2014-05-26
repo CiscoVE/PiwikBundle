@@ -1,10 +1,9 @@
 parameters:
-    cisco.piwik.client.class:                  CiscoSystems\PiwikBundle\Model\Client
+    cisco.piwik.client.class:                  CiscoSystems\PiwikBundle\Model\Connection
     cisco.piwik.client.token:                   null
     cisco.piwik.client.url:                     null
     cisco.piwik.client.site_id:                 0
     cisco.piwik.client.format:                  null
-
     cisco.piwik.module.class:                   CiscoSystems\PiwikBundle\Model\Module
 
 services:
