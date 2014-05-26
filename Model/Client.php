@@ -2,12 +2,10 @@
 
 namespace CiscoSystems\PiwikBundle\Model;
 
-use CiscoSystems\PiwikBundle\Model\ModuleInterface;
+use Buzz\Browser;
 /**
-
-  Repository: https://github.com/VisualAppeal/Piwik-PHP-API
-  Official api reference: http://piwik.org/docs/analytics-api/reference/
-
+ * Repository: https://github.com/VisualAppeal/Piwik-PHP-API
+ * Official api reference: http://piwik.org/docs/analytics-api/reference/
  */
 class Client
 {
@@ -32,11 +30,11 @@ class Client
     const FORMAT_RSS        = 'rss';
     const FORMAT_ORIGINAL   = 'original';
 
-    protected $site       = '';
-    protected $token      = '';
-    protected $siteId     = 0;
-    protected $format     = self::FORMAT_PHP;
-    protected $formats  = array(
+    protected $site         = '';
+    protected $token        = '';
+    protected $siteId       = 0;
+    protected $format       = self::FORMAT_PHP;
+    protected $formats      = array(
         self::FORMAT_CSV,
         self::FORMAT_HTML,
         self::FORMAT_JSON,
@@ -46,19 +44,26 @@ class Client
         self::FORMAT_TSV,
         self::FORMAT_XML
     );
-    protected $language   = 'en';
-    protected $period     = self::PERIOD_DAY;
-    protected $periods    = array(
+    protected $language     = 'en';
+    protected $period       = self::PERIOD_DAY;
+    protected $periods      = array(
         self::PERIOD_DAY,
         self::PERIOD_MONTH,
         self::PERIOD_WEEK,
         self::PERIOD_YEAR
     );
-    protected $date       = '';
-    protected $rangeStart = self::DATE_YESTERDAY;
-    protected $rangeEnd   = null;
-    protected $limit      = '';
-    protected $errors     = array();
+    protected $date         = '';
+    protected $rangeStart   = self::DATE_YESTERDAY;
+    protected $rangeEnd     = null;
+    protected $limit        = '';
+    protected $errors       = array();
+    protected $charset      = 'utf-8';
+    protected $mimeType     = '';
+    protected $mimeTypes    = array(
+        'json'  => 'application/json',
+        'xml'   => 'application/xml',
+        'tsv'   => 'text/tab-separated-values'
+    );
 
     function __construct(
             $site,
@@ -182,6 +187,26 @@ class Client
         $this->limit = $limit;
     }
 
+    public function getCharset()
+    {
+        return $this->charset;
+    }
+
+    public function setCharset( $charset )
+    {
+        $this->charset = $charset;
+    }
+
+    public function getMimeType()
+    {
+        return $this->mimeType;
+    }
+
+    public function setMimeType( $mimeType )
+    {
+        $this->mimeType = $mimeType;
+    }
+
     public function reset()
     {
         $this->period = self::PERIOD_DAY;
@@ -200,6 +225,14 @@ class Client
     public function request( $method, $params = array() )
     {
         $url = $this->parseUrl( $method, $params );
+
+        $browser  = new Browser() ;
+        $response = $browser->get( $url );
+
+        $contentType = $response->getHeader( 'Content-Type' );
+
+        ladybug_dump_die( explode( '; ', $contentType ) );
+
         // 	var_dump($url);
         $handle = curl_init();
         curl_setopt( $handle, CURLOPT_URL, $url );
@@ -278,13 +311,17 @@ class Client
 
     public function parseRequest( $request )
     {
-        switch( $this->format )
-        {
-            case self::FORMAT_JSON:
-                return ( strpos( $request, '{' ) != 0 ) ? $request : json_decode( $request );
-            default:
-                return $request;
-        }
+        return ( $this->format === self::FORMAT_JSON ) ?
+                json_decode( $request ) : $request;
+
+
+//        switch( $this->format )
+//        {
+//            case self::FORMAT_JSON:
+//                return ( strpos( $request, '{' ) != 0 ) ? $request : json_decode( $request );
+//            default:
+//                return $request;
+//        }
     }
 
     private function addError( $msg = '' )
