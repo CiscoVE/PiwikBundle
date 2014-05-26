@@ -4,8 +4,7 @@ namespace CiscoSystems\PiwikBundle\Model;
 
 use Buzz\Browser;
 /**
- * Repository: https://github.com/VisualAppeal/Piwik-PHP-API
- * Official api reference: http://piwik.org/docs/analytics-api/reference/
+ * derived from: https://github.com/VisualAppeal/Piwik-PHP-API
  */
 class Client
 {
