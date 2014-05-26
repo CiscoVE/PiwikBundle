@@ -229,10 +229,6 @@ class Connection
         try
         {
             $content = $this->getContent( $response );
-
-//            ( $this->mimeType === 'text/html' ) ?
-//                $this->addError( 'This is not a JSON file' ) :
-//                $json = $response->json();
         }
         catch( ClientErrorResponseException  $e )
         {
@@ -240,7 +236,6 @@ class Connection
             $this->addError( $e->getResponse() );
         }
 
-//        return count( $this->errors ) === 0 ? $json['value'] : $this->getErrors();
         return count( $this->errors ) === 0 ? $content : $this->getErrors();
     }
 
@@ -252,7 +247,9 @@ class Connection
                 $this->addError( 'Response returned an HTML message instead of a JSON or an XML' );
                 $size = $response->getBody()->getSize();
                 $response->getBody()->seek( 0 );
-                return $response->getBody()->read( $size );
+                $html = $response->getBody()->read( $size );
+
+                return $this->html( $html );
             case 'application/json':
                 return $response->json();
             case 'application/xml':
@@ -262,7 +259,10 @@ class Connection
 
     private function html( $html )
     {
+        $crawler = new Crawler( $html );
+        $node = $crawler->filter( 'p' )->first();
 
+        return $node->text();
     }
 
     private function getContentType( $response )
