@@ -210,8 +210,7 @@ class Connection
     {
         $params = count( $params ) > 0 ? $params[0] : $params;
         $query['query'] = array_merge( $params, array(
-            'module'        => 'Foo',
-//            'module'        => 'API',
+            'module'        => 'API',
             'method'        => $method,
             'token_auth'    => $this->token,
             'idSite'        => $this->siteId,
@@ -251,7 +250,9 @@ class Connection
 
                 return $this->html( $html );
             case 'application/json':
-                return $response->json();
+                $json = $response->json();
+
+                return $json['value'];
             case 'application/xml':
                 return $response->xml();
         }
