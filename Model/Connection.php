@@ -3,15 +3,13 @@
 namespace CiscoSystems\PiwikBundle\Model;
 
 //use Buzz\Browser;
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 
 /**
  * derived from: https://github.com/VisualAppeal/Piwik-PHP-API
  */
 class Connection
 {
-    const ERROR_INVALID     = 10;
-    const ERROR_EMPTY       = 11;
 
     const PERIOD_DAY        = 'day';
     const PERIOD_WEEK       = 'week';
@@ -35,24 +33,24 @@ class Connection
     protected $token        = '';
     protected $siteId       = 0;
     protected $format       = self::FORMAT_PHP;
-    protected $formats      = array(
-        self::FORMAT_CSV,
-        self::FORMAT_HTML,
-        self::FORMAT_JSON,
-        self::FORMAT_ORIGINAL,
-        self::FORMAT_PHP,
-        self::FORMAT_RSS,
-        self::FORMAT_TSV,
-        self::FORMAT_XML
-    );
+//    protected $formats      = array(
+//        self::FORMAT_CSV,
+//        self::FORMAT_HTML,
+//        self::FORMAT_JSON,
+//        self::FORMAT_ORIGINAL,
+//        self::FORMAT_PHP,
+//        self::FORMAT_RSS,
+//        self::FORMAT_TSV,
+//        self::FORMAT_XML
+//    );
     protected $language     = 'en';
     protected $period       = self::PERIOD_DAY;
-    protected $periods      = array(
-        self::PERIOD_DAY,
-        self::PERIOD_MONTH,
-        self::PERIOD_WEEK,
-        self::PERIOD_YEAR
-    );
+//    protected $periods      = array(
+//        self::PERIOD_DAY,
+//        self::PERIOD_MONTH,
+//        self::PERIOD_WEEK,
+//        self::PERIOD_YEAR
+//    );
     protected $date         = '';
     protected $rangeStart   = self::DATE_YESTERDAY;
     protected $rangeEnd     = null;
@@ -60,11 +58,6 @@ class Connection
     protected $errors       = array();
     protected $charset      = 'utf-8';
     protected $mimeType     = '';
-    protected $mimeTypes    = array(
-        'json'  => 'application/json',
-        'xml'   => 'application/xml',
-        'tsv'   => 'text/tab-separated-values'
-    );
 
     function __construct(
             $site,
@@ -193,19 +186,9 @@ class Connection
         return $this->charset;
     }
 
-    public function setCharset( $charset )
-    {
-        $this->charset = $charset;
-    }
-
     public function getMimeType()
     {
         return $this->mimeType;
-    }
-
-    public function setMimeType( $mimeType )
-    {
-        $this->mimeType = $mimeType;
     }
 
     public function reset()
@@ -225,112 +208,47 @@ class Connection
 
     public function request( $method, $params = array() )
     {
-        $url = $this->parseUrl( $method, $params );
-        $client = new Client();
-        $res = $client->get( $url );
-//        echo $res->getStatusCode();           // 200
-//        $header = $res->getHeader(); // 'application/json; charset=utf8'
-        $contentType = $res->getHeader( 'content-type' ); // 'application/json; charset=utf8'
-//        echo $res->getBody();                 // {"type":"User"...'
-
-        ladybug_dump_die( $url, $res, $contentType );
-
-//        $browser  = new Browser() ;
-//        $response = $browser->get( $url );
-
-//        $contentType = $response->getHeader( 'Content-Type' );
-
-//        ladybug_dump_die( explode( '; ', $contentType ) );
-
-        // 	var_dump($url);
-        $handle = curl_init();
-        curl_setopt( $handle, CURLOPT_URL, $url );
-        curl_setopt( $handle, CURLOPT_CONNECTTIMEOUT, 5 );
-        curl_setopt( $handle, CURLOPT_RETURNTRANSFER, 1 );
-        $buffer = curl_exec( $handle );
-        curl_close( $handle );
-        $request = ( !empty( $buffer ) ) ? $this->parseRequest( $buffer ) : false;
-
-        return $this->finishRequest( $request, $method, $params );
-    }
-
-    public function finishRequest( $request, $method, $params )
-    {
-        $valid = $this->validRequest( $request );
-
-        if( $valid === true )
-        {
-            return ( isset( $request->value ) ) ? $request->value : $request;
-        }
-        else
-        {
-            $request = $this->addError( $valid . ' (' . $this->parseUrl( $method, $params ) . ')' );
-            return false;
-        }
-    }
-
-    public function parseUrl( $method, array $params = array() )
-    {
         $params = count( $params ) > 0 ? $params[0] : $params;
-        $params = array_merge( $params, array(
-            'module'        => 'API',
+        $query['query'] = array_merge( $params, array(
+            'module'        => 'Foo',
+//            'module'        => 'API',
             'method'        => $method,
             'token_auth'    => $this->token,
             'idSite'        => $this->siteId,
             'period'        => $this->period,
             'format'        => $this->format,
             'language'      => $this->language,
-        ));
+            'date'          => (( $this->period != self::PERIOD_RANGE ) ?
+                                $this->date :
+                                $this->rangeStart . ',' . $this->rangeEnd)
+            ));
 
-        $params['date'] = ( $this->period != self::PERIOD_RANGE ) ?
-                $this->date :
-                $this->rangeStart . ',' . $this->rangeEnd;
+        $client = new Client();
 
-        $url = $this->site;
-
-        $i = 0;
-        foreach( $params as $key => $val )
+        try
         {
-            if( !empty( $val ) )
-            {
-                $i++;
-                $url .= ( $i > 1 ) ? '&' : '?';
-                if( is_array( $val ) ) { $val = implode( ',', $val ); }
-                $url .= $key . '=' . $val;
-            }
+            $response = $client->get( $this->site, $query );
+            $json = $response->json();
+            $status = $response->getStatusCode();
+        }
+        catch( ClientErrorResponseException  $e )
+        {
+            $this->addError( $e->getRequest() );
+            $this->addError( $e->getResponse() );
         }
 
-        return $url;
+        return !$this->hasError() ? $json['value'] : $this->getErrors();
     }
 
-    public function validRequest( $request )
+    public function getContentType( $response )
     {
-        if( ($request !== false) and ( !is_null( $request )) )
-        {
-            if( !isset( $request->result ) or ( $request->result != 'error') )
-            {
-                return true;
-            }
-            return $request->message;
-        }
+        list( $this->mimeType, $after ) = explode( '; ',  $response->getHeader( 'content-type' ));
+        list( $before, $this->charset ) = explode( '=', $after, 2 );
 
-        return ( is_null( $request ) ) ?
-                self::ERROR_EMPTY : self::ERROR_INVALID;
-    }
-
-    public function parseRequest( $request )
-    {
-        return ( $this->format === self::FORMAT_JSON ) ?
-                json_decode( $request ) : $request;
-
-
-//        switch( $this->format )
-//        {
-//            case self::FORMAT_JSON:
-//                return ( strpos( $request, '{' ) != 0 ) ? $request : json_decode( $request );
-//            default:
-//                return $request;
-//        }
+        return array(
+            'mimeType'  => $this->mimeType,
+            'charset'   => $this->charset
+        );
     }
 
     private function addError( $msg = '' )
