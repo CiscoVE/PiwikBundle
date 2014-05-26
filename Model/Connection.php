@@ -250,9 +250,7 @@ class Connection
 
                 return $this->html( $html );
             case 'application/json':
-                $json = $response->json();
-
-                return $json['value'];
+                return $response->json();
             case 'application/xml':
                 return $response->xml();
         }
