@@ -210,8 +210,8 @@ class Connection
     {
         $params = count( $params ) > 0 ? $params[0] : $params;
         $query['query'] = array_merge( $params, array(
-            'module'        => 'Foo',
-//            'module'        => 'API',
+//            'module'        => 'Foo',
+            'module'        => 'API',
             'method'        => $method,
             'token_auth'    => $this->token,
             'idSite'        => $this->siteId,
@@ -224,12 +224,37 @@ class Connection
             ));
 
         $client = new Client();
+        $response = $client->get( $this->site, $query );
+        // test
+//        $client = new Client([ 'base_url' => 'http://en.wikipedia.org' ]);
+//        $response = $client->get( '/wiki/Henry_Ford' );
+//        $response = $client->get( 'http://www.google.com/search?hl=en&q=cake' );
+        $body = $response->getBody();
+        $this->getContentType( $response );
+
+        ladybug_dump_die(
+                $response->getHeader( 'content-type' ),
+                $response->getEffectiveUrl(),
+                $response->getStatusCode(),
+                $response->getReasonPhrase(),
+                $body->getSize(), //258,658
+                $body->seek( 0 ),
+                $body->read( 258658 ),
+                $this->html( $response )
+                );
 
         try
         {
-            $response = $client->get( $this->site, $query );
+//            $response = $client->get( $this->site, $query );
+//            $response = $client->get( 'http://www.google.com/search?hl=en&q=cake' );
+
+//            ladybug_dump_die( $response->getBody() );
+//            ladybug_dump_die( $response->getBody()->getContents() );
+//            ladybug_dump_die( $response->getEffectiveUrl(), $response->getBody()->read( 5 ) );
+
             $json = $response->json();
             $status = $response->getStatusCode();
+
         }
         catch( ClientErrorResponseException  $e )
         {
@@ -240,7 +265,15 @@ class Connection
         return !$this->hasError() ? $json['value'] : $this->getErrors();
     }
 
-    public function getContentType( $response )
+    private function html( $response )
+    {
+        $size = $response->getBody()->getSize();
+        $response->getBody()->seek( 0 );
+
+        return $response->getBody()->read( $size );
+    }
+
+    private function getContentType( $response )
     {
         list( $this->mimeType, $after ) = explode( '; ',  $response->getHeader( 'content-type' ));
         list( $before, $this->charset ) = explode( '=', $after, 2 );
