@@ -10,7 +10,6 @@ use GuzzleHttp\Client;
  */
 class Connection
 {
-
     const PERIOD_DAY        = 'day';
     const PERIOD_WEEK       = 'week';
     const PERIOD_MONTH      = 'month';
@@ -33,24 +32,8 @@ class Connection
     protected $token        = '';
     protected $siteId       = 0;
     protected $format       = self::FORMAT_PHP;
-//    protected $formats      = array(
-//        self::FORMAT_CSV,
-//        self::FORMAT_HTML,
-//        self::FORMAT_JSON,
-//        self::FORMAT_ORIGINAL,
-//        self::FORMAT_PHP,
-//        self::FORMAT_RSS,
-//        self::FORMAT_TSV,
-//        self::FORMAT_XML
-//    );
     protected $language     = 'en';
     protected $period       = self::PERIOD_DAY;
-//    protected $periods      = array(
-//        self::PERIOD_DAY,
-//        self::PERIOD_MONTH,
-//        self::PERIOD_WEEK,
-//        self::PERIOD_YEAR
-//    );
     protected $date         = '';
     protected $rangeStart   = self::DATE_YESTERDAY;
     protected $rangeEnd     = null;

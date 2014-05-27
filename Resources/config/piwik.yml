@@ -1,7 +1,0 @@
-parameters:
-    cisco.piwik.config:
-        url:        http://analytics.veorg.cisco.com
-        token:      anonymous
-        site_id:    1
-        format:     json
-

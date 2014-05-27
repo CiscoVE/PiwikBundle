@@ -26,7 +26,6 @@ class CiscoSystemsPiwikExtension extends Extension
     {
         $fileLocator = new FileLocator( __DIR__ . '/../Resources/config' );
         $loader = new Loader\YamlFileLoader( $container, $fileLocator );
-        $loader->load( 'piwik.yml' );
         $loader->load( 'services.yml' );
 
         $config = $this->mergeConfigs( $configs );
