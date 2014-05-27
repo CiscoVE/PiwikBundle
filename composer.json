@@ -18,7 +18,7 @@
     },
 
     "autoload": {
-        "psr-0": { "CiscoSystems\\MenuBundle": "" }
+        "psr-0": { "CiscoSystems\\PiwikBundle": "" }
     },
-    "target-dir": "CiscoSystems/MenuBundle"
+    "target-dir": "CiscoSystems/PiwikBundle"
 }
