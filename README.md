@@ -1,17 +1,37 @@
-Broken at the moment:
 
-error message as follow:
+Setup:
+======
 
+Add and adapt to your need the following to the ```app/config/config.yml``` file:
 
-``` html
-<div style='word-wrap: break-word; border: 3px solid red; padding:4px; width:70%; background-color:#FFFF96;'>
-        <strong>There is an error. Please report the message (Piwik 2.1.0)
-        and full backtrace in the <a href='?module=Proxy&action=redirect&url=http://forum.piwik.org' target='_blank'>Piwik forums</a> (please do a Search first as it might have been reported already!).<br /><br/>
-        Notice:</strong> <em>Array to string conversion</em> in <strong>/apps/piwik/core/dispatch.php</strong> on line <strong>33</strong>
-<br /><br />Backtrace --&gt;<div style="font-family:Courier;font-size:10pt"><br />
-#0  Piwik\Error::errorHandler(...) called at [/apps/piwik/core/dispatch.php:33]<br />
-#1  require_once(...) called at [/apps/piwik/index.php:47]<br />
-</div><br />
- </pre></div><br />
-Array
+``` YML
+cisco_systems_piwik:
+    url:            http://piwik.demo-site.com
+    token:          anonymous
+    site_id:        1
+    format:         json
+```
+Usage:
+=====
+
+Call the service ```cisco.piwik.client```.
+
+Assign the variable you would normally use if you were to query the API directly
+(see [the reporting API] (http://developer.piwik.org/api-reference/reporting-api) ).
+
+``` php
+        $client = $this->container->get( 'cisco.piwik.client' );
+        $client->setLanguage('en');
+```
+
+Then load the desired module:
+
+``` php
+        $visitsSummary = $client->getModule( 'VisitsSummary' );
+```
+
+Finally call the Method to get the data back:
+
+``` php
+        return $visitsSummary->getVisits();
 ```
