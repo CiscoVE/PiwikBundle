@@ -1,4 +1,20 @@
 
+PiwikBundle
+===========
+
+Wrapper to call the Piwik Reporting API
+======
+
+Installation:
+======
+
+Run composer. Then add:
+``` PHP
+        $bundles = array(
+            new CiscoSystems\PiwikBundle\CiscoSystemsPiwikBundle(),
+        );
+```
+
 Setup:
 ======
 
@@ -12,7 +28,7 @@ cisco_systems_piwik:
     format:         json
 ```
 Usage:
-=====
+======
 
 Call the service ```cisco.piwik.client```.
 

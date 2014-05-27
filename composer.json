@@ -1,0 +1,24 @@
+{
+    "name": "cisco-systems/piwik-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony bundle for querying the piwik reporting api",
+    "keywords": ["reporting", "api", "piwik", "analytics"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Roche",
+            "email": "throche@cisco.com",
+            "homepage": "www.cisco.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/symfony": ">=2.1",
+        "guzzlehttp/guzzle": "4.*"
+    },
+
+    "autoload": {
+        "psr-0": { "CiscoSystems\\MenuBundle": "" }
+    },
+    "target-dir": "CiscoSystems/MenuBundle"
+}
